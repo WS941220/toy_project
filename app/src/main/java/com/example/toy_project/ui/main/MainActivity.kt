@@ -7,8 +7,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import com.example.memo_line.util.addFragmentToActivity
 import com.example.memo_line.util.replaceFragmentInActivity
 import com.example.toy_project.R
 import com.example.toy_project.ui.main.adopt.AdoptFragment
@@ -42,13 +40,6 @@ class MainActivity(
         R.drawable.ic_talk_se,
         R.drawable.ic_chat_se,
         R.drawable.ic_profile_se
-    ),
-    private val navFragments: Array<Any> = arrayOf(
-        HomeFragment,
-        AdoptFragment,
-        TalkFragment,
-        ChatFragment,
-        ProfileFragment
     )
 ) : DaggerAppCompatActivity(), MainContract.View {
 
@@ -99,23 +90,23 @@ class MainActivity(
 
         if (check) {
             when (it) {
-                0 -> supportFragmentManager.findFragmentById(R.id.container) as HomeFragment?
+                0 -> supportFragmentManager.findFragmentById(R.id.container)
                     ?: HomeFragment.newInstance().also {
                         replaceFragmentInActivity(it, R.id.container)
                     }
-                1 -> supportFragmentManager.findFragmentById(R.id.container) as AdoptFragment?
+                1 -> supportFragmentManager.findFragmentById(R.id.container)
                     ?: AdoptFragment.newInstance().also {
                         replaceFragmentInActivity(it, R.id.container)
                     }
-                2 -> supportFragmentManager.findFragmentById(R.id.container) as TalkFragment?
+                2 -> supportFragmentManager.findFragmentById(R.id.container)
                     ?: TalkFragment.newInstance().also {
                         replaceFragmentInActivity(it, R.id.container)
                     }
-                3 -> supportFragmentManager.findFragmentById(R.id.container) as ChatFragment?
+                3 -> supportFragmentManager.findFragmentById(R.id.container)
                     ?: ChatFragment.newInstance().also {
                         replaceFragmentInActivity(it, R.id.container)
                     }
-                4 -> supportFragmentManager.findFragmentById(R.id.container) as ProfileFragment?
+                4 -> supportFragmentManager.findFragmentById(R.id.container)
                     ?: ProfileFragment.newInstance().also {
                         replaceFragmentInActivity(it, R.id.container)
                     }

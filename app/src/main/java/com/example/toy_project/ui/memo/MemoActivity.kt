@@ -1,6 +1,5 @@
 package com.example.toy_project.ui.memo
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import com.example.memo_line.util.replaceFragmentInActivity
 import com.example.memo_line.util.setupActionBar

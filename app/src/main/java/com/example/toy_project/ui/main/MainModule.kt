@@ -6,8 +6,11 @@ import com.example.toy_project.ui.main.adopt.AdoptContract
 import com.example.toy_project.ui.main.adopt.AdoptFragment
 import com.example.toy_project.ui.main.adopt.AdoptPresenter
 import com.example.toy_project.ui.main.chat.ChatContract
+import com.example.toy_project.ui.main.chat.ChatFragment
 import com.example.toy_project.ui.main.chat.ChatPresenter
 import com.example.toy_project.ui.main.home.*
+import com.example.toy_project.ui.main.profile.ProfileFragment
+import com.example.toy_project.ui.main.talk.TalkFragment
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -49,12 +52,24 @@ class MainModule {
         @Binds
         fun profilePresenter(profilepresenter : ProfilePresenter): ProfileContract.ProfilePresenter
 
-//        @FragmentScoped
-//        @ContributesAndroidInjector
-//        fun homeFragment(): HomeFragment
-//
-//        @FragmentScoped
-//        @ContributesAndroidInjector
-//        fun adoptFragment(): AdoptFragment
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun homeFragment(): HomeFragment
+
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun adoptFragment(): AdoptFragment
+
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun talkFragment(): TalkFragment
+
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun chatFragment(): ChatFragment
+
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun profileFragment(): ProfileFragment
     }
 }
