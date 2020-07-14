@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">TOY_PROJECT</string>
+    
+    <string name="tab_home">홈</string>
+    <string name="tab_adopt">분양/입양</string>
+    <string name="tab_talk">토크</string>
+    <string name="tab_chat">채팅</string>
+    <string name="tab_profile">내정보</string>
+    
+    
     <string name="title">모든 메모</string>
     <string name="add_memo">글 작성</string>
     <string name="edit_memo">메모 수정</string>

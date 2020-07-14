@@ -42,5 +42,6 @@ ext {
     materialVersion = '1.1.0'
     cardVersion = '1.0.0'
     recyclerViewVersion = '1.1.0'
+    viewPagerVersion = '1.0.0'
     roomVersion = '1.0.0'
 }

@@ -37,7 +37,7 @@ class MemoAdapter(
         if(image != null) {
             Glide.with(this.context!!)
                 .load(image)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .into(holder.pic)
         }

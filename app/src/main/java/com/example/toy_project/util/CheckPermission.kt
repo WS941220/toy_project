@@ -10,7 +10,6 @@ class CheckPermission constructor(
     permission: String,
     requestCode: Int
 ) {
-
     init {
         if (ContextCompat.checkSelfPermission(
                 fragment.activity!!,
@@ -36,6 +35,4 @@ class CheckPermission constructor(
             fragment.onRequestPermissionsResult(requestCode, arrayOf(permission), IntArray(1) {PackageManager.PERMISSION_GRANTED})
         }
     }
-
-
 }

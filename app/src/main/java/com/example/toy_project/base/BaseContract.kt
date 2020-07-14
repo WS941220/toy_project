@@ -1,5 +1,4 @@
 package com.example.toy_project.base
-
 class BaseContract {
 
     interface Presenter<in T> {

@@ -1,7 +1,9 @@
 package com.example.toy_project.ui.gallery
 
+import android.app.Activity
 import android.content.ContentUris
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.MediaStore
@@ -29,7 +31,7 @@ class GalleryActivity : DaggerAppCompatActivity(), GalleryContract.View {
         setContentView(R.layout.activity_gallery)
 
         galleryAdapter = GalleryAdapter(baseContext, picItem, this)
-        galleryRecycler.layoutManager = GridLayoutManager(baseContext, 3)
+        galleryRecycler.layoutManager = GridLayoutManager(baseContext, 3) as RecyclerView.LayoutManager
         galleryRecycler.adapter = galleryAdapter
 
         /**
@@ -58,8 +60,16 @@ class GalleryActivity : DaggerAppCompatActivity(), GalleryContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> this.onBackPressed()
+            R.id.menu_success -> sendPictures()
         }
         return true
+    }
+
+    private fun sendPictures() {
+        val intent = Intent()
+        intent.putStringArrayListExtra("pics", galleryAdapter.sPic)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private fun getGallery() {

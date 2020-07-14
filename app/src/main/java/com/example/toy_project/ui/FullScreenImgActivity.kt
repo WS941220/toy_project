@@ -14,12 +14,11 @@ import kotlinx.android.synthetic.main.activity_full_screen_img.*
 
 class FullScreenImgActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_screen_img)
 
-        val uri = intent.getParcelableExtra<Uri>("uri")
+        val uri = intent.getStringExtra("uri")
 
         setupActionBar(R.id.toolbar) {
             setTitle(R.string.nothing)
@@ -27,13 +26,13 @@ class FullScreenImgActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true);
         }
 
-        val actionBar = findViewById<AppBarLayout>(R.id.actionBar).apply {
+        findViewById<AppBarLayout>(R.id.actionBar).apply {
             bringToFront()
         }
 
         Glide.with(this)
             .load(uri?.toString())
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .error(R.drawable.ic_not_found).into(fullScreenImg)
     }
 

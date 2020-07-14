@@ -2,6 +2,7 @@ package com.example.toy_project.ui.gallery
 
 import com.example.toy_project.base.BasePresenter
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 

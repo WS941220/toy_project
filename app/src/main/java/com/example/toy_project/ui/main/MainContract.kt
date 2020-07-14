@@ -9,9 +9,9 @@ interface MainContract {
 
     }
 
-    interface Presenter : BaseContract.Presenter<View> {
-        fun okBtn(id: String, pw: String, baseContext: Context)
-        fun passBtn(baseContext: Context)
+    interface Presenter : BaseContract.Presenter<View>{
+
     }
+
 }
 

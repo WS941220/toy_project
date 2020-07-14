@@ -1,12 +1,15 @@
 package com.example.toy_project.ui.memo
 
 import android.app.Activity
+import android.view.View
+import com.example.toy_project.base.BaseContract
 import com.example.toy_project.base.BasePresenter
 import com.example.toy_project.data.source.MemosDataSource
 import com.example.toy_project.data.source.MemosRepository
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Memo
 import com.example.toy_project.ui.addeditmemo.AddEditMemoActivity
+import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 import javax.inject.Inject

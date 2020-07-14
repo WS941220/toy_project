@@ -1,14 +1,56 @@
 package com.example.toy_project.ui.main
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.example.memo_line.util.addFragmentToActivity
+import com.example.memo_line.util.replaceFragmentInActivity
 import com.example.toy_project.R
-import com.example.toy_project.ui.memo.MemoActivity
+import com.example.toy_project.ui.main.adopt.AdoptFragment
+import com.example.toy_project.ui.main.chat.ChatFragment
+import com.example.toy_project.ui.main.home.HomeFragment
+import com.example.toy_project.ui.main.profile.ProfileFragment
+import com.example.toy_project.ui.main.talk.TalkFragment
+import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity(), MainContract.View {
+class MainActivity(
+    private val navIcons: Array<Int> = arrayOf(
+        R.drawable.ic_home,
+        R.drawable.ic_adopt,
+        R.drawable.ic_talk,
+        R.drawable.ic_chat,
+        R.drawable.ic_profile
+    ),
+    private val navLabels: Array<Int> = arrayOf(
+        R.string.tab_home,
+        R.string.tab_adopt,
+        R.string.tab_talk,
+        R.string.tab_chat,
+        R.string.tab_profile
+    ),
+    private val navIconsActive: Array<Int> = arrayOf(
+        R.drawable.ic_home_se,
+        R.drawable.ic_adopt_se,
+        R.drawable.ic_talk_se,
+        R.drawable.ic_chat_se,
+        R.drawable.ic_profile_se
+    ),
+    private val navFragments: Array<Any> = arrayOf(
+        HomeFragment,
+        AdoptFragment,
+        TalkFragment,
+        ChatFragment,
+        ProfileFragment
+    )
+) : DaggerAppCompatActivity(), MainContract.View {
 
     @Inject
     lateinit var presenter: MainContract.Presenter
@@ -16,18 +58,76 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var usrid: String
-        var usrpw: String
 
-        ok_btn.setOnClickListener {
-            usrid = id_test.text.toString()
-            usrpw = pw_test.text.toString()
+//        supportFragmentManager.findFragmentById(R.id.container)
+//                as HomeFragment? ?: HomeFragment.newInstance().also {
+//            addFragmentToActivity(it, "")
+//        }
 
-            presenter.okBtn(usrid, usrpw, baseContext)
+        (0..4).forEach {
+            tabs.addTab(tabs.newTab().setText(resources.getString(navLabels[it])))
         }
-        pass_btn.setOnClickListener {
-            presenter.passBtn(baseContext)
+
+        (0 until tabs.tabCount).forEach {
+            when (it) {
+                0 -> tabs.getTabAt(it)?.customView = changeTab(it, null, true)
+                else -> tabs.getTabAt(it)?.customView = changeTab(it, null, false)
+            }
         }
+
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.customView = changeTab(tab!!.position, tab.customView as LinearLayout, true)
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                tab?.customView = changeTab(tab!!.position, tab.customView as LinearLayout, false)
+            }
+        })
     }
 
+    @SuppressLint("InflateParams")
+    private fun changeTab(it: Int, tab: LinearLayout?, check: Boolean): LinearLayout {
+        val customTab: LinearLayout =
+            tab ?: LayoutInflater.from(this).inflate(R.layout.nav_tab, null) as LinearLayout
+        val tab_label = customTab.findViewById(R.id.nav_label) as TextView
+        val tab_icon = customTab.findViewById(R.id.nav_icon) as ImageView
+        tab_label.setText(resources.getString(navLabels[it]))
+
+        if (check) {
+            when (it) {
+                0 -> supportFragmentManager.findFragmentById(R.id.container) as HomeFragment?
+                    ?: HomeFragment.newInstance().also {
+                        replaceFragmentInActivity(it, R.id.container)
+                    }
+                1 -> supportFragmentManager.findFragmentById(R.id.container) as AdoptFragment?
+                    ?: AdoptFragment.newInstance().also {
+                        replaceFragmentInActivity(it, R.id.container)
+                    }
+                2 -> supportFragmentManager.findFragmentById(R.id.container) as TalkFragment?
+                    ?: TalkFragment.newInstance().also {
+                        replaceFragmentInActivity(it, R.id.container)
+                    }
+                3 -> supportFragmentManager.findFragmentById(R.id.container) as ChatFragment?
+                    ?: ChatFragment.newInstance().also {
+                        replaceFragmentInActivity(it, R.id.container)
+                    }
+                4 -> supportFragmentManager.findFragmentById(R.id.container) as ProfileFragment?
+                    ?: ProfileFragment.newInstance().also {
+                        replaceFragmentInActivity(it, R.id.container)
+                    }
+            }
+
+            tab_label.setTextColor(ContextCompat.getColor(baseContext, R.color.primary));
+            tab_icon.setImageResource(navIconsActive[it])
+        } else {
+            tab_label.setTextColor(ContextCompat.getColor(baseContext, R.color.colorPrimaryDark));
+            tab_icon.setImageResource(navIcons[it])
+        }
+        return customTab
+    }
 }
+

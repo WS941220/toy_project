@@ -19,7 +19,7 @@ import com.example.toy_project.R
 
 
 class AddEditMemoAdapter(
-    private val context: Context?, var pics: ArrayList<Uri>, var visible: Int,
+    private val context: Context?, var pics: ArrayList<String>, var visible: Int,
     fragment: Fragment
 ) : RecyclerView.Adapter<AddEditMemoAdapter.AddEditMemoViewHolder>() {
 
@@ -35,7 +35,7 @@ class AddEditMemoAdapter(
 
         val image = pics[position]
         Glide.with(this.context!!).load(image)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .error(R.drawable.ic_not_found)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
@@ -90,7 +90,7 @@ class AddEditMemoAdapter(
     interface onItemClickListener {
         fun itemRemove(position: Int)
 
-        fun fullImage(image: Uri)
+        fun fullImage(image: String)
 
         fun failImage()
     }

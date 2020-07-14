@@ -4,6 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_item_padding">8dp</dimen>
+    <dimen name="tiny_padding">5dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="dialog_padding">12dp</dimen>
@@ -13,5 +14,7 @@
 
     <dimen name="back_raius">40dp</dimen>
     <dimen name="img_raius">20dp</dimen>
+
+    <dimen name="nav_tab_label_font_size">12sp</dimen>
 
 </resources>

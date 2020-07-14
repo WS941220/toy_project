@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,13 +16,23 @@ class GalleryAdapter(
     private val context: Context?, var pics: List<String>, activity: Activity
 ) : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
-    private val sPic: MutableList<String> = arrayListOf()
+    var sPic: ArrayList<String> = arrayListOf()
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
         Glide.with(context!!).load(pics[position]).into(holder.ivImg)
         holder.ivImg.setOnClickListener {
             val pic = pics[position]
-            if (holder.vSelected.visibility == View.VISIBLE) sPic.remove(pic) else sPic.add(pic)
-            holder.vSelected.visibility = if (holder.vSelected.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            if (sPic.size == 20) {
+                if (holder.vSelected.visibility == View.VISIBLE) {
+                    sPic.remove(pic)
+                    holder.vSelected.visibility = View.GONE
+                    Toast.makeText(context, "${sPic.size}/20", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(context, "20개까지 선택가능", Toast.LENGTH_SHORT).show()
+            } else {
+                if (holder.vSelected.visibility == View.VISIBLE) sPic.remove(pic) else sPic.add(pic)
+                holder.vSelected.visibility =
+                    if (holder.vSelected.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                Toast.makeText(context, "${sPic.size}/20", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -5,11 +5,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -67,7 +65,7 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
     private var currentPhotoPath = ""
     private lateinit var photoURI: Uri
 
-    private val picItem = ArrayList<Uri>(0)
+    private val picItem = ArrayList<String>(0)
     private val picItem2 = ArrayList<String>(0)
     private lateinit var picAdapter: AddEditMemoAdapter
 
@@ -94,7 +92,7 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
             setImageResource(R.drawable.ic_done)
             setOnClickListener {
                 for (i in 0 until picItem.size) {
-                    picItem2.add(picItem[i].toString())
+                    picItem2.add(picItem[i])
                 }
                 presenter.saveMemo(title.text.toString(), content.text.toString(), picItem2)
             }
@@ -139,7 +137,7 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
     override fun setImages(images: List<String>) {
         for (i in images.indices) {
             if (images[i] != "") {
-                picItem.add(Uri.parse(images.get(i)))
+                picItem.add(images[i])
             }
         }
         picAdapter.pics = picItem
@@ -243,14 +241,16 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
      * 갤러리 권한 체크
      */
     override fun showGallery() {
-        CheckPermission(this,  Manifest.permission.READ_EXTERNAL_STORAGE, PICK_GALLERY_ID)
+        CheckPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE, PICK_GALLERY_ID)
     }
 
     /**
      * 권한 RESULT
      */
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
         when (requestCode) {
             PICK_GALLERY_ID -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -295,18 +295,12 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
      * 갤러리 사진 선택 후
      */
     override fun showSuccessGallery(data: Intent?) {
-        val clipData = data?.clipData
-        if (data == null) {
+        val pics = data?.getStringArrayListExtra("pics")
+        if (pics?.size == 0) {
             presenter.showMessage(getString(R.string.fail_multi_gallery))
         } else {
-            if (clipData == null) {
-                picItem.add(data.data!!)
-            } else {
-                for (i in 0 until clipData.itemCount) {
-                    val imagePath = clipData.getItemAt(i).uri
-
-                    picItem.add(imagePath)
-                }
+            for (i in 0 until pics!!.size) {
+                picItem.add(pics[i])
             }
             picAdapter.notifyDataSetChanged()
         }
@@ -316,7 +310,7 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
      * 카메라 권한 체크
      */
     override fun showCamera() {
-        CheckPermission(this,  Manifest.permission.CAMERA, PICK_CAMERA_ID)
+        CheckPermission(this, Manifest.permission.CAMERA, PICK_CAMERA_ID)
     }
 
     /**
@@ -357,8 +351,8 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
             .setPositiveButton("확인") { dialog, i ->
                 val imgUrl = inputUrl.text.toString()
                 val urlCheck = URLUtil.isValidUrl(imgUrl)
-                if(urlCheck) {
-                    picItem.add(Uri.parse(imgUrl))
+                if (urlCheck) {
+                    picItem.add(imgUrl)
                 } else {
                     presenter.showMessage(getString(R.string.fail_url))
                 }
@@ -402,7 +396,7 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
      * 카메라 사진 추가
      */
     override fun showSuccessCamera() {
-        picItem.add(photoURI)
+        picItem.add(photoURI.toString())
         picAdapter.notifyDataSetChanged()
     }
 
@@ -444,7 +438,7 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
     /**
      * 이미지 클릭시
      */
-    override fun fullImage(image: Uri) {
+    override fun fullImage(image: String) {
         val intent = Intent(this.context, FullScreenImgActivity::class.java)
         intent.putExtra("uri", image)
         startActivity(intent)

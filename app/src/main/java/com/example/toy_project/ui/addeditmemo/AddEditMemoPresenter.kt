@@ -3,7 +3,6 @@ package com.example.toy_project.ui.addeditmemo
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import com.example.toy_project.base.BasePresenter
 import com.example.toy_project.data.source.MemosDataSource
 import com.example.toy_project.data.source.MemosRepository
