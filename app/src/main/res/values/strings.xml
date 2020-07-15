@@ -21,6 +21,7 @@
     <string name="nothing"> </string>
 
     <string name="menu_attach">Attach</string>
+    <string name="menu_search">Search</string>
     <string name="success">완료</string>
 
     <string name="menu_camera">카메라</string>

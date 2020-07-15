@@ -20,8 +20,7 @@ class MemoActivity : DaggerAppCompatActivity() {
          */
         setupActionBar(R.id.toolbar) {
             setDisplayShowCustomEnabled(false)
-            setCustomView(R.layout.actionbar_checkbox)
-            setTitle(R.string.title)
+            setTitle(R.string.nothing)
             // 네비 on
 //            setHomeAsUpIndicator(R.drawable.ic_menu)
 //            setDisplayHomeAsUpEnabled(true)
