@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:button="@null"
-        android:drawableStart="@drawable/chekbox_background"/>
+        android:drawableStart="@drawable/background_chekbox"/>
 
         <TextView
             android:layout_width="wrap_content"

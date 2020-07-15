@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@color/white"
-        android:background="@drawable/main_card_background"
+        android:background="@drawable/background_main_card"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -30,7 +30,7 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_gravity="center"
                 android:button="@null"
-                android:drawableStart="@drawable/chekbox_background"
+                android:drawableStart="@drawable/background_chekbox"
                 android:visibility="gone"/>
 
         </LinearLayout>

@@ -17,7 +17,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecycler"
-        android:background="@drawable/main_card_background"
+        android:background="@drawable/background_main_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

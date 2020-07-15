@@ -1,5 +1,6 @@
 package com.example.toy_project.ui.main.adopt
 
+import android.content.Intent
 import android.media.Image
 import android.os.Bundle
 import android.view.*
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.ui.addeditmemo.AddEditMemoActivity
+import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
+import com.example.toy_project.ui.memo.MemoAdapter
 import com.jakewharton.rxbinding2.view.visibility
 import dagger.android.support.DaggerFragment
 import org.w3c.dom.Text
@@ -19,7 +23,7 @@ import javax.inject.Inject
 
 @ActivityScoped
 class AdoptFragment : DaggerFragment(),
-    AdoptContract.AdoptView {
+    AdoptContract.AdoptView, AdoptAdapterR.ItemListener {
 
     companion object {
         fun newInstance(): AdoptFragment {
@@ -37,13 +41,13 @@ class AdoptFragment : DaggerFragment(),
     private lateinit var category_btn: ImageView
 
     private lateinit var adoptAdapterR: AdoptAdapterR
-    private val listItemsTxt: MutableList<String> = arrayListOf("TEST1", "TEST2", "TEST3")
+    private val categoryItems: MutableList<String> = arrayListOf("TEST1", "TEST2", "TEST3")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.subscribe()
         presenter.attach(this)
-        adoptAdapterR = AdoptAdapterR(context, listItemsTxt)
+        adoptAdapterR = AdoptAdapterR(context, categoryItems, this)
     }
 
     override fun onDestroyView() {
@@ -95,7 +99,6 @@ class AdoptFragment : DaggerFragment(),
             }
         }
 
-
         val mLayoutManager = LinearLayoutManager(context)
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
@@ -116,9 +119,16 @@ class AdoptFragment : DaggerFragment(),
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.menu_search -> {
+            }
         }
         return true
+    }
+
+    override fun onStartStray() {
+        Intent(context, AddEditMemoActivity::class.java).apply {
+            startActivity(this)
+        }
     }
 
 }

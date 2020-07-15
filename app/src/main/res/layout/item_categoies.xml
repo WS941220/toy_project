@@ -11,7 +11,7 @@
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/list_item_padding"
         android:paddingBottom="@dimen/list_item_padding"
-        android:background="@drawable/category_background">
+        android:background="@drawable/background_category">
 
         <TextView
             android:id="@+id/categoryText"
