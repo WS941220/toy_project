@@ -1,17 +1,15 @@
-package com.example.toy_project.ui.stray
+package com.example.toy_project.ui.stray.strayt1
 
-import android.content.Context
 import com.example.toy_project.base.BasePresenter
 import com.example.toy_project.di.Scoped.ActivityScoped
-import com.example.toy_project.ui.main.home.HomeContract
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @ActivityScoped
-class StrayPresenter @Inject constructor(
+class Strayt1Presenter @Inject constructor(
     private val disposables: CompositeDisposable
-) : BasePresenter<StrayContract.StrayView?>(),
-    StrayContract.StrayPresenter {
+) : BasePresenter<Strayt1Contract.Strayt1View?>(),
+    Strayt1Contract.Strayt1Presenter {
 
     override fun subscribe() {
     }
@@ -22,8 +20,7 @@ class StrayPresenter @Inject constructor(
         disposables.dispose()
     }
 
-    override fun attach(view: StrayContract.StrayView) {
+    override fun attach(view: Strayt1Contract.Strayt1View) {
         this.view = view
     }
-
 }

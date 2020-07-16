@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.memo_line.util.setupActionBar
 import com.example.toy_project.R
+import com.example.toy_project.util.setupActionBar
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_full_screen_img.*
 

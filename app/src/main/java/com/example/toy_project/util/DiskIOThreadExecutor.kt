@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.util
+package com.example.toy_project.util
 
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors

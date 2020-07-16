@@ -2,11 +2,11 @@ package com.example.toy_project.di.module
 
 import android.app.Application
 import androidx.room.Room
-import com.example.android.architecture.blueprints.todoapp.util.AppExecutors
-import com.example.android.architecture.blueprints.todoapp.util.DiskIOThreadExecutor
+import com.example.android.toy_project.util.AppExecutors
 import com.example.toy_project.data.source.local.MemoDao
 import com.example.toy_project.data.source.local.LocalDatabase
 import com.example.toy_project.di.Scoped.AppScoped
+import com.example.toy_project.util.DiskIOThreadExecutor
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.Executors

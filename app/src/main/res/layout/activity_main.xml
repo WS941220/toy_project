@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/shared_toolbar" />
+    <include layout="@layout/shared_appbar" />
 
     <FrameLayout
         android:id="@+id/container"

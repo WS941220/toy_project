@@ -12,7 +12,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.memo_line.util.setupActionBar
+import com.example.toy_project.util.setupActionBar
 import com.example.toy_project.R
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_gallery.*

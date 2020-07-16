@@ -1,4 +1,4 @@
-package com.example.memo_line.util
+package com.example.toy_project.util
 
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar

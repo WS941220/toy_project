@@ -1,6 +1,6 @@
 package com.example.toy_project.data.source
 
-import com.example.android.architecture.blueprints.todoapp.util.AppExecutors
+import com.example.android.toy_project.util.AppExecutors
 import com.example.toy_project.data.source.local.MemoDao
 import com.example.toy_project.di.Scoped.AppScoped
 import com.example.toy_project.di.model.Memo

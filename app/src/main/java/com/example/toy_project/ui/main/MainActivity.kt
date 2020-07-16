@@ -7,15 +7,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.memo_line.util.addFragmentToActivity
-import com.example.memo_line.util.replaceFragmentInActivity
-import com.example.memo_line.util.setupActionBar
 import com.example.toy_project.R
 import com.example.toy_project.ui.main.adopt.AdoptFragment
 import com.example.toy_project.ui.main.chat.ChatFragment
 import com.example.toy_project.ui.main.home.HomeFragment
 import com.example.toy_project.ui.main.profile.ProfileFragment
 import com.example.toy_project.ui.main.talk.TalkFragment
+import com.example.toy_project.util.addFragmentToActivity
+import com.example.toy_project.util.replaceFragmentInActivity
+import com.example.toy_project.util.setupActionBar
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -65,7 +65,7 @@ class MainActivity(
         setupActionBar(R.id.toolbar) {
             setDisplayShowCustomEnabled(false)
             setCustomView(R.layout.actionbar_category)
-            setTitle(R.string.title)
+            setTitle(R.string.nothing)
             // 네비 on
 //            setHomeAsUpIndicator(R.drawable.ic_menu)
 //            setDisplayHomeAsUpEnabled(true)
@@ -106,7 +106,7 @@ class MainActivity(
         first: Boolean
     ): LinearLayout {
         val customTab: LinearLayout =
-            tab ?: LayoutInflater.from(this).inflate(R.layout.nav_tab, null) as LinearLayout
+            tab ?: LayoutInflater.from(this).inflate(R.layout.tab_main, null) as LinearLayout
         val tab_label = customTab.findViewById(R.id.nav_label) as TextView
         val tab_icon = customTab.findViewById(R.id.nav_icon) as ImageView
         tab_label.text = resources.getString(navLabels[it])

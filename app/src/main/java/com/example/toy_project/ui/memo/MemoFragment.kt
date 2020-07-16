@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.memo_line.util.showSnackBar
+import com.example.toy_project.util.showSnackBar
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Memo

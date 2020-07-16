@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/shared_toolbar" />
+    <include layout="@layout/shared_appbar" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -15,15 +15,16 @@
         app:tabMaxWidth="0dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIndicatorHeight="0dp">
+        app:tabIndicatorColor="@color/primary"
+        app:tabIndicatorHeight="2dp">
     </com.google.android.material.tabs.TabLayout>
 
-    <FrameLayout
-        android:id="@+id/container"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pagers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </FrameLayout>
+    </androidx.viewpager2.widget.ViewPager2>
 
 
 </LinearLayout>

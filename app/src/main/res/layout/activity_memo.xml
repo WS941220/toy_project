@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:background="@color/colorPrimary">
 
-        <include layout="@layout/shared_toolbar"/>
+        <include layout="@layout/shared_appbar"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"

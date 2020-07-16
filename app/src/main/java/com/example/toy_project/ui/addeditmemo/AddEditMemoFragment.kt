@@ -22,12 +22,12 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.memo_line.util.showSnackBar
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.ui.FullScreenImgActivity
 import com.example.toy_project.ui.gallery.GalleryActivity
 import com.example.toy_project.util.CheckPermission
+import com.example.toy_project.util.showSnackBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment

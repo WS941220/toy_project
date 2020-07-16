@@ -1,11 +1,11 @@
 package com.example.toy_project.ui.memo
 
 import android.os.Bundle
-import com.example.memo_line.util.replaceFragmentInActivity
-import com.example.memo_line.util.setupActionBar
 import com.example.toy_project.R
+import com.example.toy_project.util.replaceFragmentInActivity
+import com.example.toy_project.util.setupActionBar
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.shared_toolbar.*
+import kotlinx.android.synthetic.main.activity_full_screen_img.*
 
 class MemoActivity : DaggerAppCompatActivity() {
 

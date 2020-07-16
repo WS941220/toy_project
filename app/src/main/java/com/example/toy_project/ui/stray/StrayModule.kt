@@ -5,6 +5,12 @@ import com.example.toy_project.di.Scoped.FragmentScoped
 import com.example.toy_project.ui.memo.MemoContract
 import com.example.toy_project.ui.memo.MemoFragment
 import com.example.toy_project.ui.memo.MemoPresenter
+import com.example.toy_project.ui.stray.strayt1.Strayt1Contract
+import com.example.toy_project.ui.stray.strayt1.Strayt1Fragment
+import com.example.toy_project.ui.stray.strayt1.Strayt1Presenter
+import com.example.toy_project.ui.stray.strayt2.Strayt2Contract
+import com.example.toy_project.ui.stray.strayt2.Strayt2Fragment
+import com.example.toy_project.ui.stray.strayt2.Strayt2Presenter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -24,10 +30,22 @@ class StrayModule {
     interface StrayAbstractModule {
         @ActivityScoped
         @Binds
-        fun strayPresenter(StrayPresenter : StrayPresenter): StrayContract.StrayPresenter
+        fun strayPresenter(strayPresenter : StrayPresenter): StrayContract.StrayPresenter
 
-//        @FragmentScoped
-//        @ContributesAndroidInjector
-//        fun memoFragment(): MemoFragment
+        @ActivityScoped
+        @Binds
+        fun strayt1Presenter(strayt1Presenter : Strayt1Presenter): Strayt1Contract.Strayt1Presenter
+
+        @ActivityScoped
+        @Binds
+        fun strayt2Presenter(strayt2Presenter : Strayt2Presenter): Strayt2Contract.Strayt2Presenter
+
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun strayt1Fragment(): Strayt1Fragment
+
+        @FragmentScoped
+        @ContributesAndroidInjector
+        fun strayt2Fragment(): Strayt2Fragment
     }
 }

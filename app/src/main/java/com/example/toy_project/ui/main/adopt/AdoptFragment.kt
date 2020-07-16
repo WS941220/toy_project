@@ -16,6 +16,7 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.ui.addeditmemo.AddEditMemoActivity
 import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
 import com.example.toy_project.ui.memo.MemoAdapter
+import com.example.toy_project.ui.stray.StrayActivity
 import com.jakewharton.rxbinding2.view.visibility
 import dagger.android.support.DaggerFragment
 import org.w3c.dom.Text
@@ -36,7 +37,7 @@ class AdoptFragment : DaggerFragment(),
     private lateinit var rootView: View
     private lateinit var categories: ConstraintLayout
     private lateinit var categoryR: RecyclerView
-    private lateinit var action_category: LinearLayout
+    private lateinit var action_category: View
     private lateinit var category_title: TextView
     private lateinit var category_btn: ImageView
 
@@ -75,7 +76,7 @@ class AdoptFragment : DaggerFragment(),
             action_category =
                 (activity as AppCompatActivity).supportActionBar?.customView?.findViewById(
                     R.id.action_category
-                ) as LinearLayout
+                ) as View
             category_title =
                 (activity as AppCompatActivity).supportActionBar?.customView?.findViewById(
                     R.id.category_title
@@ -85,7 +86,7 @@ class AdoptFragment : DaggerFragment(),
                     R.id.category_btn
                 ) as ImageView
 
-            action_category.setOnClickListener {
+            (action_category as View).setOnClickListener {
                 when (categories.visibility) {
                     View.GONE -> {
                         category_btn.setImageResource(R.drawable.ic_drop_down)
@@ -126,7 +127,7 @@ class AdoptFragment : DaggerFragment(),
     }
 
     override fun onStartStray() {
-        Intent(context, AddEditMemoActivity::class.java).apply {
+        Intent(context, StrayActivity::class.java).apply {
             startActivity(this)
         }
     }

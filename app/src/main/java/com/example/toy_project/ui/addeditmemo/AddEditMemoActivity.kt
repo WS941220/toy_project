@@ -2,9 +2,9 @@ package com.example.toy_project.ui.addeditmemo
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
-import com.example.memo_line.util.replaceFragmentInActivity
-import com.example.memo_line.util.setupActionBar
 import com.example.toy_project.R
+import com.example.toy_project.util.replaceFragmentInActivity
+import com.example.toy_project.util.setupActionBar
 
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.shared_toolbar.*
@@ -26,8 +26,8 @@ class AddEditMemoActivity : DaggerAppCompatActivity() {
          */
         setupActionBar(R.id.toolbar) {
             setTitle(if (memoId == null) R.string.add_memo else R.string.nothing)
-            setDisplayHomeAsUpEnabled(true);
-            setDisplayShowHomeEnabled(true);
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
 
         supportFragmentManager.findFragmentById(R.id.contentFrame) as AddEditMemoFragment?
