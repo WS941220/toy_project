@@ -70,8 +70,8 @@ class AdoptFragment : DaggerFragment(),
             val actionbar = (activity as AppCompatActivity).supportActionBar
             actionbar?.apply {
                 setCustomView(R.layout.actionbar_category)
-                setTitle(R.string.nothing)
                 setDisplayShowCustomEnabled(true)
+                setTitle(R.string.nothing)
             }
             action_category =
                 (activity as AppCompatActivity).supportActionBar?.customView?.findViewById(
@@ -86,7 +86,7 @@ class AdoptFragment : DaggerFragment(),
                     R.id.category_btn
                 ) as ImageView
 
-            (action_category as View).setOnClickListener {
+            action_category.setOnClickListener {
                 when (categories.visibility) {
                     View.GONE -> {
                         category_btn.setImageResource(R.drawable.ic_drop_down)

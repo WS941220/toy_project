@@ -19,12 +19,12 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.ui.stray.strayt1.Strayt1Fragment
 import com.example.toy_project.ui.stray.strayt2.Strayt2Fragment
 import com.example.toy_project.util.setupActionBar
-import com.example.toy_project.util.setToolbarTitle
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_stray.*
 import kotlinx.android.synthetic.main.activity_stray.tabs
+import kotlinx.android.synthetic.main.shared_toolbar.*
 import javax.inject.Inject
 
 @ActivityScoped
@@ -46,9 +46,8 @@ class StrayActivity(
          * 툴바
          */
         setupActionBar(R.id.toolbar) {
-            customView = setToolbarTitle(baseContext, "TESTTT")
+            toolbarTitle.text = "유기동물 가족만들기"
             setDisplayShowTitleEnabled(false)
-            setDisplayShowCustomEnabled(true)
             setDisplayHomeAsUpEnabled(true)
         }
 
