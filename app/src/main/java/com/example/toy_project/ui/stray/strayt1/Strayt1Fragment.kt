@@ -30,8 +30,6 @@ class Strayt1Fragment : DaggerFragment(),
         presenter.attach(this)
     }
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.unsubscribe()
@@ -44,7 +42,7 @@ class Strayt1Fragment : DaggerFragment(),
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_stray_t1, container, false)
         with(rootView) {
-
+            presenter.callApi(this.context)
         }
         return rootView
     }
