@@ -3,47 +3,46 @@ package com.example.toy_project.di.model
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
+import retrofit2.http.Body
 
-@Root(name = "response")
-data class Sid constructor(
+@Root(name = "response", strict = false)
+class Sido {
+    @field:Element(name = "header")
+//    @param:ElementList(name = "header", inline = true, required = false)
+    var header: Headers? = null
 
-    @field:ElementList(name = "header")
-    @param:ElementList(name = "header", inline = true, required = false)
-    private var header: List<Headers>,
+    @field:ElementList(name = "body", inline = true, required = false)
+//    @param:ElementList(name = "body", inline = true, required = false)
+    var body: List<Bodys> = arrayListOf()
+}
 
-    @field:ElementList(name = "body")
-    @param:ElementList(name = "body", inline = true, required = false)
-    private var body: List<Bodys>
-)
-
-@Root(name = "header")
-data class Headers constructor(
+@Root(name = "header", strict = false)
+class Headers {
 
     @field:Element(name = "resultCode")
-    @param:Element(name = "resultCode", required= false)
-    private var resultCode: String,
+   var resultCode: String? = null
 
     @field:Element(name = "resultMsg")
-    @param:Element(name = "resultMsg", required= false)
-    private var resultMsg: String
-)
+    var resultMsg: String? = null
+}
 
-@Root(name = "body")
-data class Bodys constructor(
+@Root(name = "body", strict = false)
+class Bodys {
+    @field:ElementList(name = "items", inline = true, required = false)
+    var items: List<Items> = arrayListOf()
+}
 
-    @field:Element(name = "items")
-    @param:Element(name = "items")
-    private var items: List<Items>
-)
+
+@Root(name = "items")
+class Items {
+    @field:ElementList(name = "item", inline = true)
+    var items: List<Items> = arrayListOf()
+}
 
 @Root(name = "item")
-data class Items constructor(
-
+class Item {
     @field:Element(name = "orgCd")
-    @param:Element(name = "orgCd")
-    private var orgCd: String,
-
+    var orgCd: String? = null
     @field:Element(name = "orgdownNm")
-    @param:Element(name = "orgdownNm")
-    private var orgdownNm: String
-)
+    var orgdownNm: String? = null
+}

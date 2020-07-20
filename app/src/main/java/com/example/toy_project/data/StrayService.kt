@@ -13,5 +13,6 @@ import retrofit2.http.*
 
 interface StrayService {
     @GET("sido")
-    fun getSido(@Query("ServiceKey") ServiceKey: String): Flowable<Sido>
+//    @Headers("Content-Type: application/xml", "Accept: application/xml")
+    fun getSido(@Query("serviceKey") serviceKey: String): Flowable<Sido>
 }

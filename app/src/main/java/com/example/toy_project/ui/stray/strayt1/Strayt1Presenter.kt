@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import java.net.URLDecoder
 import javax.inject.Inject
 
 @ActivityScoped
@@ -34,7 +35,7 @@ class Strayt1Presenter @Inject constructor(
 
     @SuppressLint("CheckResult")
     override fun callApi(baseContext: Context) {
-        strayService.getSido("5Tw%2Fstk%2B3iRvnBoAmHJt6oYNtexGTEOpU39Ke0LM%2F02mKPbIkJWFOs5AS%2BwBCyeiA%2BXShu8bvmpp1a1nWDmN0w%3D%3D").subscribeOn(
+        strayService.getSido(URLDecoder.decode("LnE79Xug3YnCqjQlhWbhYgsnvqFg%2FHdbuGGXi3ElPWAaaiBISuQr4j7l3JtaoTeZqNyD5uG0noW031U%2BiJzASA%3D%3D")).subscribeOn(
             Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
                 onNext = {

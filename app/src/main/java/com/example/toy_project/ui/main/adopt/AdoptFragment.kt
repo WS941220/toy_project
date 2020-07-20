@@ -35,20 +35,43 @@ class AdoptFragment : DaggerFragment(),
     @Inject
     lateinit var presenter: AdoptContract.AdoptPresenter
     private lateinit var rootView: View
-    private lateinit var categories: ConstraintLayout
+    private lateinit var categories: View
     private lateinit var categoryR: RecyclerView
     private lateinit var action_category: View
     private lateinit var category_title: TextView
     private lateinit var category_btn: ImageView
 
     private lateinit var adoptAdapterR: AdoptAdapterR
-    private val categoryItems: MutableList<String> = arrayListOf("TEST1", "TEST2", "TEST3")
+    private val categoryItems: MutableList<AdoptAdapterR.Companion.Item> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.subscribe()
         presenter.attach(this)
+
+
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "Fruits", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Apple", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Orange", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Banana", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "Cars", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Audi", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Aston Martin", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "BMW", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Cadillac", true))
+        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "유기동물 가족만들기", false))
+
+        val places: AdoptAdapterR.Companion.Item =
+            AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "Places",true)
+        places.invisibleChildren.add(
+            AdoptAdapterR.Companion.Item(
+                AdoptAdapterR.Child,
+                "Karnataka", true
+            )
+        )
+        categoryItems.add(places)
         adoptAdapterR = AdoptAdapterR(context, categoryItems, this)
+
     }
 
     override fun onDestroyView() {
@@ -99,13 +122,10 @@ class AdoptFragment : DaggerFragment(),
                 }
             }
         }
-
         val mLayoutManager = LinearLayoutManager(context)
-        mLayoutManager.reverseLayout = true
-        mLayoutManager.stackFromEnd = true
-
         categoryR.layoutManager = mLayoutManager
         categoryR.adapter = adoptAdapterR
+
         setHasOptionsMenu(true)
 
         return rootView
