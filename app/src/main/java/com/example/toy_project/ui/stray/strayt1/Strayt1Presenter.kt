@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.toy_project.base.BasePresenter
 import com.example.toy_project.data.StrayService
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.util.SettingPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @ActivityScoped
 class Strayt1Presenter @Inject constructor(
     private val disposables: CompositeDisposable,
-    private val strayService: StrayService
+    private val strayService: StrayService,
+    private val preference: SettingPreference
 ) : BasePresenter<Strayt1Contract.Strayt1View?>(),
     Strayt1Contract.Strayt1Presenter {
 
@@ -35,7 +37,7 @@ class Strayt1Presenter @Inject constructor(
 
     @SuppressLint("CheckResult")
     override fun callApi(baseContext: Context) {
-        strayService.getSido(URLDecoder.decode("LnE79Xug3YnCqjQlhWbhYgsnvqFg%2FHdbuGGXi3ElPWAaaiBISuQr4j7l3JtaoTeZqNyD5uG0noW031U%2BiJzASA%3D%3D")).subscribeOn(
+        strayService.getSido(URLDecoder.decode(preference.getStrayKey(), "UTF-8")).subscribeOn(
             Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
                 onNext = {

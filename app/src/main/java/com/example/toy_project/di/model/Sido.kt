@@ -8,17 +8,14 @@ import retrofit2.http.Body
 @Root(name = "response", strict = false)
 class Sido {
     @field:Element(name = "header")
-//    @param:ElementList(name = "header", inline = true, required = false)
     var header: Headers? = null
 
     @field:ElementList(name = "body", inline = true, required = false)
-//    @param:ElementList(name = "body", inline = true, required = false)
     var body: List<Bodys> = arrayListOf()
 }
 
 @Root(name = "header", strict = false)
 class Headers {
-
     @field:Element(name = "resultCode")
    var resultCode: String? = null
 
@@ -33,16 +30,17 @@ class Bodys {
 }
 
 
-@Root(name = "items")
+@Root(name = "items", strict = false)
 class Items {
-    @field:ElementList(name = "item", inline = true)
-    var items: List<Items> = arrayListOf()
+    @field:ElementList(name = "item", inline = true, required = false)
+    var item: List<Item> = arrayListOf()
 }
 
-@Root(name = "item")
+@Root(name = "item", strict = false)
 class Item {
-    @field:Element(name = "orgCd")
+    @field:Element(name = "orgCd", required = false)
     var orgCd: String? = null
-    @field:Element(name = "orgdownNm")
+
+    @field:Element(name = "orgdownNm", required = false)
     var orgdownNm: String? = null
 }

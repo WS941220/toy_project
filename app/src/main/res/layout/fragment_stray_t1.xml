@@ -32,11 +32,11 @@
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/strayRecyler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/tab_home" />
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
 </LinearLayout>
