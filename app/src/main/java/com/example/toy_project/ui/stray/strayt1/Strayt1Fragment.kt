@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.di.model.Item
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -23,11 +26,20 @@ class Strayt1Fragment : DaggerFragment(),
     @Inject
     lateinit var presenter: Strayt1Contract.Strayt1Presenter
     private lateinit var rootView: View
+    private lateinit var strayRecyler: RecyclerView
+    private lateinit var strayAdapter: Strayt1Adapter
+
+    private var strayList: MutableList<Item> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.subscribe()
+        strayAdapter = Strayt1Adapter(context, strayList, this)
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter.attach(this)
+        presenter.getStrayList(context!!, activity!!)
     }
 
     override fun onDestroyView() {
@@ -42,9 +54,19 @@ class Strayt1Fragment : DaggerFragment(),
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_stray_t1, container, false)
         with(rootView) {
-            presenter.callApi(this.context)
+            strayRecyler = findViewById(R.id.strayRecyler)
         }
+
+        val mLayoutManager = LinearLayoutManager(context)
+        strayRecyler.layoutManager = mLayoutManager
+        strayRecyler.adapter = strayAdapter
+
         return rootView
+    }
+
+    override fun showStrayList(strayList: List<Item>) {
+        this.strayList.addAll(strayList)
+        strayAdapter.notifyDataSetChanged()
     }
 
 }

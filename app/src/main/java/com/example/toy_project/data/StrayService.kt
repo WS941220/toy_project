@@ -1,18 +1,17 @@
 package com.example.toy_project.data
 
-import com.example.toy_project.di.Scoped.AppScoped
-import com.example.toy_project.di.model.Sido
-import com.example.toy_project.di.model.Token
-import com.example.toy_project.di.model.User
-import dagger.Provides
+import com.example.toy_project.di.model.Stray
 import io.reactivex.Flowable
-import kotlinx.coroutines.Deferred
-import org.json.JSONObject
-import retrofit2.Call
 import retrofit2.http.*
 
 interface StrayService {
     @GET("sido")
-//    @Headers("Content-Type: application/xml", "Accept: application/xml")
-    fun getSido(@Query("serviceKey") serviceKey: String): Flowable<Sido>
+    fun getSido(@Query("serviceKey") serviceKey: String): Flowable<Stray>
+
+    @GET("abandonmentPublic")
+    fun getStrayList(
+        @Query("bgnde") bgnde: String, @Query("endde") endde: String, @Query("upkind") upkind: String,
+        @Query("upr_cd") upr_cd: String, @Query("org_cd") org_cd: String, @Query("care_reg_no") care_reg_no: String,
+        @Query("pageNo") pageNo: String, @Query("numOfRows") numOfRows: String, @Query("serviceKey") serviceKey: String
+    ): Flowable<Stray>
 }
