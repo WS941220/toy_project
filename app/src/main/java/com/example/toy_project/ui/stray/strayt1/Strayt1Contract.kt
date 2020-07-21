@@ -12,6 +12,6 @@ interface Strayt1Contract {
     }
 
     interface Strayt1Presenter : BaseContract.Presenter<Strayt1View> {
-        fun getStrayList(baseContext: Context,  activity: Activity)
+        fun getStrayList(baseContext: Context,  activity: Activity, stray: Map<String, String>)
     }
 }

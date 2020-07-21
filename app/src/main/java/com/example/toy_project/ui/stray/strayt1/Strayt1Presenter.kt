@@ -56,7 +56,7 @@ class Strayt1Presenter @Inject constructor(
 //    }
 
     @SuppressLint("CheckResult")
-    override fun getStrayList(baseContext: Context, activity: Activity) {
+    override fun getStrayList(baseContext: Context, activity: Activity, stray: Map<String, String>) {
         ProgressDialog().progressON(activity, "")
         strayService.getStrayList(
             URLDecoder.decode("20200621", "UTF-8"),
@@ -65,7 +65,7 @@ class Strayt1Presenter @Inject constructor(
             URLDecoder.decode("", "UTF-8"),
             URLDecoder.decode("", "UTF-8"),
             URLDecoder.decode("", "UTF-8"),
-            URLDecoder.decode("1", "UTF-8"),
+            URLDecoder.decode(stray["num"], "UTF-8"),
             URLDecoder.decode("20", "UTF-8"),
             URLDecoder.decode(preference.getStrayKey(), "UTF-8")
         ).subscribeOn(

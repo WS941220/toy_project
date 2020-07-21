@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Item
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -30,6 +32,9 @@ class Strayt1Fragment : DaggerFragment(),
     private lateinit var strayAdapter: Strayt1Adapter
 
     private var strayList: MutableList<Item> = arrayListOf()
+    private var strayList2: MutableList<Item> = arrayListOf()
+    private var callStray: MutableMap<String, String> = hashMapOf()
+    private var numPager: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +44,32 @@ class Strayt1Fragment : DaggerFragment(),
     override fun onStart() {
         super.onStart()
         presenter.attach(this)
-        presenter.getStrayList(context!!, activity!!)
+        callStray["num"] = "$numPager"
+        presenter.getStrayList(context!!, activity!!, callStray)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.unsubscribe()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        strayRecyler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                when (strayRecyler.canScrollVertically(1)) {
+                    true -> {
+                        if (strayList2.size == 20) {
+                            strayList2.clear()
+                            callStray["num"] = "${numPager + 1}"
+                            presenter.getStrayList(context!!, activity!!, callStray)
+                        }
+                    }
+                }
+            }
+        })
     }
 
     override fun onCreateView(
@@ -66,6 +91,7 @@ class Strayt1Fragment : DaggerFragment(),
 
     override fun showStrayList(strayList: List<Item>) {
         this.strayList.addAll(strayList)
+        this.strayList2.addAll(strayList)
         strayAdapter.notifyDataSetChanged()
     }
 
