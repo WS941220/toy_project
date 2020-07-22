@@ -38,10 +38,16 @@ class Strayt1Adapter(
         holder.noticeTxt.text = stray.noticeNo
         holder.placeTxt.text = stray.happenPlace
 
-        when(stray.processState) {
-            "보호중" -> holder.stateTxt.setTextColor(ContextCompat.getColor(context, R.color.green))
-            "종료(입양)" -> holder.stateTxt.setTextColor(ContextCompat.getColor(context, R.color.red))
-            else -> holder.stateTxt.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+        when {
+            stray.processState!!.contains("보호중") -> {
+                holder.stateTxt.setTextColor(ContextCompat.getColor(context, R.color.green))
+            }
+            stray.processState!!.contains("종료") -> {
+                holder.stateTxt.setTextColor(ContextCompat.getColor(context, R.color.red))
+            }
+            else -> {
+                holder.stateTxt.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+            }
         }
 
     }

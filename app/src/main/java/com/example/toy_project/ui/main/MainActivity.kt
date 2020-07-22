@@ -75,15 +75,21 @@ class MainActivity(
 
         (0 until tabs.tabCount).forEach {
             when (it) {
-                0 -> tabs.getTabAt(it)?.customView = changeTab(it, null, true, true)
-                else -> tabs.getTabAt(it)?.customView = changeTab(it, null, false, false)
+                0 -> tabs.getTabAt(it)?.customView = changeTab(it, null, check = true, first = true)
+                else -> tabs.getTabAt(it)?.customView = changeTab(it, null,
+                    check = false,
+                    first = false
+                )
             }
         }
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab?.customView =
-                    changeTab(tab!!.position, tab.customView as LinearLayout, true, false)
+                    changeTab(tab!!.position, tab.customView as LinearLayout,
+                        check = true,
+                        first = false
+                    )
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -91,7 +97,10 @@ class MainActivity(
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 tab?.customView =
-                    changeTab(tab!!.position, tab.customView as LinearLayout, false, false)
+                    changeTab(tab!!.position, tab.customView as LinearLayout,
+                        check = false,
+                        first = false
+                    )
             }
         })
     }
