@@ -31,7 +31,7 @@ class Strayt1Adapter(
             "F" -> "암컷"
             else -> "미상"
         }
-        Glide.with(context!!).load(stray.filename).into(holder.picImg)
+        Glide.with(context!!).load(stray.popfile).into(holder.picImg)
         holder.stateTxt.text = stray.processState
         holder.dateTxt.text = "${dateFormat(stray.noticeSdt)} ~ ${dateFormat(stray.noticeEdt)}"
         holder.kindTxt.text = "${stray.kindCd} | ${stray.colorCd} | $sSexCd".replace("[기타축종] ", "")

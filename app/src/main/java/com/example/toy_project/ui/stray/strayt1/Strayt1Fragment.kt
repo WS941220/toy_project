@@ -63,7 +63,7 @@ class Strayt1Fragment(
     private lateinit var strayRecyler: RecyclerView
     private lateinit var strayAdapter: Strayt1Adapter
     private lateinit var tabs: TabLayout
-    private lateinit var frameLayout: FrameLayout
+    private lateinit var frameLayout: LinearLayout
 
     private var strayList: MutableList<Item> = arrayListOf()
     private var callStray: MutableMap<String, String> = hashMapOf()
@@ -95,6 +95,7 @@ class Strayt1Fragment(
                 if (lastVisible >= totalItemCount - 1) {
                     callStray["num"] = "${numPager + 1}"
                     presenter.getStrayList(context!!, activity!!, callStray)
+                    numPager++
                 }
             }
         })
@@ -207,14 +208,6 @@ class Strayt1Fragment(
         return customTab
     }
 
-    private fun TabLayout.setTabWidthAsWrapContent(tabPosition: Int, weight: Float, width: Int) {
-        val layout = (this.getChildAt(0) as LinearLayout).getChildAt(tabPosition) as LinearLayout
-        val layoutParams = layout.layoutParams as LinearLayout.LayoutParams
-        layoutParams.weight = weight
-        layoutParams.width = width
-        layoutParams.gravity = Gravity.START
-        layout.layoutParams = layoutParams
-    }
 
 
     override fun showStrayList(strayList: List<Item>) {
