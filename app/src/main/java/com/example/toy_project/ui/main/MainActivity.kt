@@ -76,7 +76,8 @@ class MainActivity(
         (0 until tabs.tabCount).forEach {
             when (it) {
                 0 -> tabs.getTabAt(it)?.customView = changeTab(it, null, check = true, first = true)
-                else -> tabs.getTabAt(it)?.customView = changeTab(it, null,
+                else -> tabs.getTabAt(it)?.customView = changeTab(
+                    it, null,
                     check = false,
                     first = false
                 )
@@ -86,7 +87,8 @@ class MainActivity(
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab?.customView =
-                    changeTab(tab!!.position, tab.customView as LinearLayout,
+                    changeTab(
+                        tab!!.position, tab.customView as LinearLayout,
                         check = true,
                         first = false
                     )
@@ -97,7 +99,8 @@ class MainActivity(
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 tab?.customView =
-                    changeTab(tab!!.position, tab.customView as LinearLayout,
+                    changeTab(
+                        tab!!.position, tab.customView as LinearLayout,
                         check = false,
                         first = false
                     )
@@ -119,7 +122,7 @@ class MainActivity(
         tab_label.text = resources.getString(navLabels[it])
 
         when (first) {
-            true -> supportFragmentManager.findFragmentById(R.id.container) as HomeFragment?
+            true -> supportFragmentManager.findFragmentById(R.id.container)
                 ?: HomeFragment.newInstance().also {
                     addFragmentToActivity(it, "MAIN")
                 }

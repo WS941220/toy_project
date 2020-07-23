@@ -30,10 +30,10 @@ class AddEditMemoActivity : DaggerAppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        supportFragmentManager.findFragmentById(R.id.contentFrame) as AddEditMemoFragment?
-            ?: AddEditMemoFragment.newInstance(memoId).also {
-                replaceFragmentInActivity(it, R.id.contentFrame)
-            }
+//        supportFragmentManager.findFragmentById(R.id.contentFrame) as AddEditMemoFragment?
+//            ?: AddEditMemoFragment.newInstance(memoId).also {
+//                replaceFragmentInActivity(it, R.id.contentFrame)
+//            }
 
     }
 

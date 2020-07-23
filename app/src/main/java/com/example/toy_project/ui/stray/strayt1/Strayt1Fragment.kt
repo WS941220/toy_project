@@ -2,30 +2,27 @@ package com.example.toy_project.ui.stray.strayt1
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Item
 import com.example.toy_project.ui.stray.strayt1.calendar.CalendarFragment
 import com.example.toy_project.ui.stray.strayt1.location.LocationFragment
-import com.example.toy_project.util.addFragmentToActivity
-import com.example.toy_project.util.addFragmentToFragment
-import com.example.toy_project.util.replaceFragmentInActivity
 import com.example.toy_project.util.replaceFragmentInFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_stray_t1.*
 import javax.inject.Inject
 import kotlin.reflect.cast
 
@@ -63,7 +60,10 @@ class Strayt1Fragment(
     private lateinit var strayRecyler: RecyclerView
     private lateinit var strayAdapter: Strayt1Adapter
     private lateinit var tabs: TabLayout
+    private lateinit var filterIcon: ImageView
     private lateinit var frameLayout: LinearLayout
+    private lateinit var bottomSheet: LinearLayout
+    private lateinit var sheetBehavior: BottomSheetBehavior<LinearLayout>
 
     private var strayList: MutableList<Item> = arrayListOf()
     private var callStray: MutableMap<String, String> = hashMapOf()
@@ -109,10 +109,10 @@ class Strayt1Fragment(
 
         }
 
+
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                tab?.customView =
-                    changeTab(tab!!.position, tab.customView as LinearLayout, true)
+                changeTab(tab!!.position, tab.customView as LinearLayout, true)
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -145,18 +145,31 @@ class Strayt1Fragment(
         with(rootView) {
             strayRecyler = findViewById(R.id.strayRecyler)
             tabs = findViewById(R.id.tabs)
+            bottomSheet = findViewById(R.id.contentLayout)
             frameLayout = findViewById(R.id.container)
+            filterIcon = findViewById(R.id.filterIcon)
         }
-        childFragmentManager.findFragmentById(R.id.container) as LocationFragment?
-            ?: LocationFragment.newInstance().also {
-                addFragmentToFragment(it, "STRAY")
-            }
+
+        filterIcon.setOnClickListener { toggleFilters() }
+
+        sheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        sheetBehavior.isFitToContents = false
+        sheetBehavior.isHideable = false
+        sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         val mLayoutManager = LinearLayoutManager(context)
         strayRecyler.layoutManager = mLayoutManager
         strayRecyler.adapter = strayAdapter
 
         return rootView
+    }
+
+    private fun toggleFilters() {
+        if (sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            sheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+        } else {
+            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+        }
     }
 
     @SuppressLint("InflateParams")
@@ -207,7 +220,6 @@ class Strayt1Fragment(
         }
         return customTab
     }
-
 
 
     override fun showStrayList(strayList: List<Item>) {

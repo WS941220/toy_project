@@ -1,11 +1,17 @@
 package com.example.toy_project.ui.stray.strayt1.calendar
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.Pair
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.ui.main.MainActivity
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -36,6 +42,39 @@ class CalendarFragment : DaggerFragment(),
         presenter.unsubscribe()
     }
 
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val builder: MaterialDatePicker.Builder<*> = MaterialDatePicker.Builder.dateRangePicker()
+        val constraintsBuilder = CalendarConstraints.Builder()
+        try {
+            builder.setCalendarConstraints(constraintsBuilder.build())
+            val picker: MaterialDatePicker<*> = builder.build()
+            getDateRange(picker)
+            picker.show(childFragmentManager, picker.toString())
+        } catch (e: IllegalArgumentException) {
+
+        }
+    }
+
+    private fun getDateRange(materialCalendarPicker: MaterialDatePicker<out Any>) {
+        materialCalendarPicker.addOnPositiveButtonClickListener(
+            { selection: Any? ->
+//                Log.e("DateRangeText",materialCalendarPicker.headerText)
+
+            })
+        materialCalendarPicker.addOnNegativeButtonClickListener(
+            { dialog: View? ->
+            }
+        )
+        materialCalendarPicker.addOnCancelListener(
+            { dialog: DialogInterface? ->
+            }
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +84,7 @@ class CalendarFragment : DaggerFragment(),
         with(rootView) {
 
         }
+
         return rootView
     }
 
