@@ -30,8 +30,8 @@ import kotlin.reflect.cast
 @ActivityScoped
 class Strayt1Fragment(
     private val navLabels: Array<Int> = arrayOf(
-        R.string.tab_home,
-        R.string.tab_adopt
+        R.string.stray_location,
+        R.string.stray_date
     ),
     private val navFragments: Array<Any> = arrayOf(
         LocationFragment,
@@ -100,19 +100,18 @@ class Strayt1Fragment(
             }
         })
 
-        (0..1).forEach {
-            tabs.addTab(tabs.newTab().setText(""))
+        (0 until navLabels.count()).forEach {
+            tabs.addTab(tabs.newTab().setText(resources.getString(navLabels[it])))
         }
 
         (0 until tabs.tabCount).forEach {
             tabs.getTabAt(it)?.customView = changeTab(it, null, false)
-
         }
-
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 changeTab(tab!!.position, tab.customView as LinearLayout, true)
+                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -134,6 +133,8 @@ class Strayt1Fragment(
                     changeTab(tab!!.position, tab.customView as LinearLayout, false)
             }
         })
+
+        filterIcon.setOnClickListener { toggleFilters() }
     }
 
     override fun onCreateView(
@@ -150,8 +151,6 @@ class Strayt1Fragment(
             filterIcon = findViewById(R.id.filterIcon)
         }
 
-        filterIcon.setOnClickListener { toggleFilters() }
-
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         sheetBehavior.isFitToContents = false
         sheetBehavior.isHideable = false
@@ -166,9 +165,11 @@ class Strayt1Fragment(
 
     private fun toggleFilters() {
         if (sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            sheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            filterIcon.setImageResource(R.drawable.ic_drop_up)
         } else {
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+            filterIcon.setImageResource(R.drawable.ic_search)
         }
     }
 

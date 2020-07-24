@@ -8,7 +8,9 @@
     <string name="tab_profile">내정보</string>
     <string name="tab_strayt1">센터 보호현황</string>
     <string name="tab_strayt2">유기동물 사연</string>
-    
+
+    <string name="stray_location">지역</string>
+    <string name="stray_date">날짜</string>
     
     <string name="title">모든 메모</string>
     <string name="add_memo">글 작성</string>

@@ -69,7 +69,7 @@ class MainActivity(
 //            setDisplayHomeAsUpEnabled(true)
         }
 
-        (0..4).forEach {
+        (0 until navLabels.count()).forEach {
             tabs.addTab(tabs.newTab().setText(resources.getString(navLabels[it])))
         }
 

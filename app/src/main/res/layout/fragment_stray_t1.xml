@@ -14,14 +14,27 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="30dp"
+            android:layout_weight="1"
             app:tabGravity="fill"
             app:tabIndicatorHeight="0dp"
             app:tabMode="scrollable"
             app:tabRippleColor="@android:color/transparent" />
+
+            <ImageView
+                android:id="@+id/searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:src="@drawable/ic_search"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/container"
@@ -36,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:behavior_peekHeight="56dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:behavior_peekHeight="40dp"
+        app:layout_behavior=".util.GestureLockedBottomSheet">
 
         <!--This is the backdrop's header with a title and icon-->
         <LinearLayout
