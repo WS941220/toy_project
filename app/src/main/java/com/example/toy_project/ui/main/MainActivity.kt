@@ -13,9 +13,7 @@ import com.example.toy_project.ui.main.chat.ChatFragment
 import com.example.toy_project.ui.main.home.HomeFragment
 import com.example.toy_project.ui.main.profile.ProfileFragment
 import com.example.toy_project.ui.main.talk.TalkFragment
-import com.example.toy_project.util.addFragmentToActivity
-import com.example.toy_project.util.replaceFragmentInActivity
-import com.example.toy_project.util.setupActionBar
+import com.example.toy_project.util.*
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -178,6 +176,14 @@ class MainActivity(
             }
         }
         return customTab
+    }
+
+    override fun showProgress(msg: String) {
+        this.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        this.progressOff()
     }
 }
 

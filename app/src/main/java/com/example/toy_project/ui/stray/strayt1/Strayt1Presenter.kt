@@ -56,11 +56,11 @@ class Strayt1Presenter @Inject constructor(
 //    }
 
     @SuppressLint("CheckResult")
-    override fun getStrayList(baseContext: Context, activity: Activity, stray: Map<String, String>) {
-        ProgressDialog().progressON(activity, "")
+    override fun getStrayList(stray: Map<String, String>) {
+        view?.showProgress("")
         strayService.getStrayList(
-            URLDecoder.decode("20200621", "UTF-8"),
-            URLDecoder.decode("20200721", "UTF-8"),
+            URLDecoder.decode(preference.getStraySdate(), "UTF-8"),
+            URLDecoder.decode(preference.getStrayEdate(), "UTF-8"),
             URLDecoder.decode("429900", "UTF-8"),
             URLDecoder.decode("", "UTF-8"),
             URLDecoder.decode("", "UTF-8"),
@@ -74,12 +74,11 @@ class Strayt1Presenter @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
                 onNext = {
                     view?.showStrayList(it.body[0].items[0].item)
-                    ProgressDialog().progressOFF()
+                    view?.closeProgress()
                 },
 
                 onError = {
-                    Toast.makeText(baseContext, it.message, Toast.LENGTH_SHORT).show()
-                    ProgressDialog().progressOFF()
+                    view?.closeProgress()
                 }
             )
     }

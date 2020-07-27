@@ -27,6 +27,8 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.ui.FullScreenImgActivity
 import com.example.toy_project.ui.gallery.GalleryActivity
 import com.example.toy_project.util.CheckPermission
+import com.example.toy_project.util.progressOff
+import com.example.toy_project.util.progressOn
 import com.example.toy_project.util.showSnackBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -461,6 +463,14 @@ class AddEditMemoFragment : DaggerFragment(), AddEditMemoContract.View,
 
         title.setOnClickListener { onEdit() }
         content.setOnClickListener { onEdit() }
+    }
+
+    override fun showProgress(msg: String) {
+        activity?.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        activity?.progressOff()
     }
 
 }

@@ -15,6 +15,8 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Memo
 import com.example.toy_project.ui.addeditmemo.AddEditMemoActivity
 import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
+import com.example.toy_project.util.progressOff
+import com.example.toy_project.util.progressOn
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
@@ -251,6 +253,14 @@ class MemoFragment : DaggerFragment(), MemoContract.View, MemoAdapter.MemoItemLi
             putExtra(AddEditMemoFragment.ARGUMENT_SHOW_MEMO_ID, memoId)
         }
         startActivity(intent)
+    }
+
+    override fun showProgress(msg: String) {
+        activity?.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        activity?.progressOff()
     }
 
 }

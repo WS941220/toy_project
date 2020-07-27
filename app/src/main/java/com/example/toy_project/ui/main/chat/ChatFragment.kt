@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.util.progressOff
+import com.example.toy_project.util.progressOn
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -47,6 +49,14 @@ class ChatFragment : DaggerFragment(),
 
         }
         return rootView
+    }
+
+    override fun showProgress(msg: String) {
+        activity?.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        activity?.progressOff()
     }
 
 }

@@ -18,6 +18,8 @@ import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.ui.stray.strayt1.Strayt1Fragment
 import com.example.toy_project.ui.stray.strayt2.Strayt2Fragment
+import com.example.toy_project.util.progressOff
+import com.example.toy_project.util.progressOn
 import com.example.toy_project.util.setupActionBar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -115,5 +117,13 @@ class StrayActivity(
         }
 
         override fun getItemCount(): Int = tabLabel.size
+    }
+
+    override fun showProgress(msg: String) {
+        this.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        this.progressOff()
     }
 }

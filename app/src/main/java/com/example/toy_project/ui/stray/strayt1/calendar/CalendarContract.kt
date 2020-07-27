@@ -10,6 +10,7 @@ interface CalendarContract {
     }
 
     interface CalendarPresenter : BaseContract.Presenter<CalendarView> {
-
+        fun setDate(sDate: String, eDate: String)
+        fun getDate(): MutableMap<String, String>
     }
 }

@@ -8,20 +8,16 @@ import android.database.Cursor
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.util.setupActionBar
 import com.example.toy_project.R
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_gallery.*
-import javax.inject.Inject
 
-class GalleryActivity : DaggerAppCompatActivity(), GalleryContract.View {
-
-    @Inject
-    lateinit var presenter: GalleryContract.Presenter
+class GalleryActivity : AppCompatActivity() {
 
     private val picItem: MutableList<String> = arrayListOf()
     private lateinit var galleryAdapter: GalleryAdapter

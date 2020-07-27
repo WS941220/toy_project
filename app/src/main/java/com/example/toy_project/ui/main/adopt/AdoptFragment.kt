@@ -17,6 +17,8 @@ import com.example.toy_project.ui.addeditmemo.AddEditMemoActivity
 import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
 import com.example.toy_project.ui.memo.MemoAdapter
 import com.example.toy_project.ui.stray.StrayActivity
+import com.example.toy_project.util.progressOff
+import com.example.toy_project.util.progressOn
 import com.jakewharton.rxbinding2.view.visibility
 import dagger.android.support.DaggerFragment
 import org.w3c.dom.Text
@@ -150,6 +152,14 @@ class AdoptFragment : DaggerFragment(),
         Intent(context, StrayActivity::class.java).apply {
             startActivity(this)
         }
+    }
+
+    override fun showProgress(msg: String) {
+        activity?.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        activity?.progressOff()
     }
 
 }

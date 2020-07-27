@@ -1,6 +1,7 @@
 package com.example.toy_project.ui.stray.strayt1
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.util.Pair
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
@@ -17,7 +19,7 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Item
 import com.example.toy_project.ui.stray.strayt1.calendar.CalendarFragment
 import com.example.toy_project.ui.stray.strayt1.location.LocationFragment
-import com.example.toy_project.util.replaceFragmentInFragment
+import com.example.toy_project.util.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
@@ -60,8 +62,6 @@ class Strayt1Fragment(
     private lateinit var strayRecyler: RecyclerView
     private lateinit var strayAdapter: Strayt1Adapter
     private lateinit var tabs: TabLayout
-    private lateinit var filterIcon: ImageView
-    private lateinit var frameLayout: LinearLayout
     private lateinit var bottomSheet: LinearLayout
     private lateinit var sheetBehavior: BottomSheetBehavior<LinearLayout>
 
@@ -74,7 +74,7 @@ class Strayt1Fragment(
         presenter.attach(this)
         strayAdapter = Strayt1Adapter(context, strayList, this)
         callStray["num"] = "$numPager"
-        presenter.getStrayList(context!!, activity!!, callStray)
+        presenter.getStrayList(callStray)
     }
 
     override fun onDestroyView() {
@@ -94,7 +94,7 @@ class Strayt1Fragment(
                 val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
                 if (lastVisible >= totalItemCount - 1) {
                     callStray["num"] = "${numPager + 1}"
-                    presenter.getStrayList(context!!, activity!!, callStray)
+                    presenter.getStrayList(callStray)
                     numPager++
                 }
             }
@@ -105,26 +105,23 @@ class Strayt1Fragment(
         }
 
         (0 until tabs.tabCount).forEach {
-            tabs.getTabAt(it)?.customView = changeTab(it, null, false)
+            when(it) {
+                0 -> tabs.getTabAt(it)?.customView = changeTab(it, null, true)
+                1 ->  tabs.getTabAt(it)?.customView = changeTab(it, null, false)
+            }
         }
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 changeTab(tab!!.position, tab.customView as LinearLayout, true)
-                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+                when (tab.position) {
+                    0 -> sheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                    1 -> sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                when (frameLayout.visibility) {
-                    View.VISIBLE -> {
-                        tab?.customView =
-                            changeTab(tab!!.position, tab.customView as LinearLayout, false)
-                    }
-                    View.GONE -> {
-                        tab?.customView =
-                            changeTab(tab!!.position, tab.customView as LinearLayout, true)
-                    }
-                }
 
             }
 
@@ -135,6 +132,8 @@ class Strayt1Fragment(
         })
 
         filterIcon.setOnClickListener { toggleFilters() }
+        searchIcon.setOnClickListener { searchLists() }
+
     }
 
     override fun onCreateView(
@@ -147,8 +146,6 @@ class Strayt1Fragment(
             strayRecyler = findViewById(R.id.strayRecyler)
             tabs = findViewById(R.id.tabs)
             bottomSheet = findViewById(R.id.contentLayout)
-            frameLayout = findViewById(R.id.container)
-            filterIcon = findViewById(R.id.filterIcon)
         }
 
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -165,12 +162,24 @@ class Strayt1Fragment(
 
     private fun toggleFilters() {
         if (sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            tabs.selectTab(tabs.getTabAt(tabs.selectedTabPosition))
+            when (tabs.selectedTabPosition) {
+                0 -> sheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                1 -> sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
             filterIcon.setImageResource(R.drawable.ic_drop_up)
         } else {
-            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+            sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             filterIcon.setImageResource(R.drawable.ic_search)
         }
+    }
+
+    private fun searchLists() {
+        strayList.clear()
+        numPager = 1
+        presenter.getStrayList(callStray)
+        sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        filterIcon.setImageResource(R.drawable.ic_search)
     }
 
     @SuppressLint("InflateParams")
@@ -201,15 +210,12 @@ class Strayt1Fragment(
                                 R.id.container
                             )
                         }
-
                     }
                 }
-                frameLayout.visibility = View.VISIBLE
                 tab_label.setTextColor(ContextCompat.getColor(context!!, R.color.primary))
                 tab_icon.setImageResource(navIconsActive[it])
             }
             false -> {
-                frameLayout.visibility = View.GONE
                 tab_label.setTextColor(
                     ContextCompat.getColor(
                         context!!,
@@ -226,6 +232,14 @@ class Strayt1Fragment(
     override fun showStrayList(strayList: List<Item>) {
         this.strayList.addAll(strayList)
         strayAdapter.notifyDataSetChanged()
+    }
+
+    override fun showProgress(msg: String) {
+        activity?.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        activity?.progressOff()
     }
 
 }

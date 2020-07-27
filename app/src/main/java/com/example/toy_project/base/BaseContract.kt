@@ -1,4 +1,7 @@
 package com.example.toy_project.base
+
+import android.app.Activity
+
 class BaseContract {
 
     interface Presenter<in T> {
@@ -8,6 +11,7 @@ class BaseContract {
     }
 
     interface View {
-
+        fun showProgress(msg: String)
+        fun closeProgress()
     }
 }

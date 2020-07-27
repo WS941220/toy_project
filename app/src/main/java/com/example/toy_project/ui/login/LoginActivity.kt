@@ -2,6 +2,8 @@ package com.example.toy_project.ui.login
 
 import android.os.Bundle
 import com.example.toy_project.R
+import com.example.toy_project.util.progressOff
+import com.example.toy_project.util.progressOn
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
@@ -30,6 +32,14 @@ class LoginActivity : DaggerAppCompatActivity(), LoginContract.View {
         main_btn.setOnClickListener {
             presenter.mainBtn(baseContext)
         }
+    }
+
+    override fun showProgress(msg: String) {
+        this.progressOn(msg)
+    }
+
+    override fun closeProgress() {
+        this.progressOff()
     }
 
 }
