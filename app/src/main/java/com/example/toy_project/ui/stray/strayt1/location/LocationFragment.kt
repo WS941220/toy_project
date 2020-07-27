@@ -35,8 +35,7 @@ class LocationFragment : DaggerFragment(),
     private lateinit var rootView: View
     private lateinit var locationAdapter: LocationAdapter
     private lateinit var popupWindow: PopupWindow
-    private lateinit var imageView: TextView
-
+ 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.subscribe()
@@ -45,10 +44,16 @@ class LocationFragment : DaggerFragment(),
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        uprSpinner.adapter = locationAdapter
+        uprSpinner.setOnClickListener {
+            popupWindow.dismiss()
+            provideCountryPopupWindow(it)
+            popupWindow.showAsDropDown(it, 0, -it.height)
+        }
+
 
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -61,15 +66,6 @@ class LocationFragment : DaggerFragment(),
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_stray_location, container, false)
-        with(rootView) {
-            imageView = findViewById(R.id.imageView)
-        }
-
-        imageView.setOnClickListener {
-            popupWindow.dismiss()
-            provideCountryPopupWindow(it)
-            popupWindow.showAsDropDown(it, 0, -it.height)
-        }
 
         return rootView
     }

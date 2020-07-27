@@ -105,15 +105,15 @@ class Strayt1Fragment(
         }
 
         (0 until tabs.tabCount).forEach {
-            when(it) {
+            when (it) {
                 0 -> tabs.getTabAt(it)?.customView = changeTab(it, null, true)
-                1 ->  tabs.getTabAt(it)?.customView = changeTab(it, null, false)
+                1 -> tabs.getTabAt(it)?.customView = changeTab(it, null, false)
             }
         }
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                changeTab(tab!!.position, tab.customView as LinearLayout, true)
+                changeTab(tab!!.position, tab.customView, true)
                 when (tab.position) {
                     0 -> sheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
                     1 -> sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -127,7 +127,7 @@ class Strayt1Fragment(
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 tab?.customView =
-                    changeTab(tab!!.position, tab.customView as LinearLayout, false)
+                    changeTab(tab!!.position, tab.customView, false)
             }
         })
 
@@ -185,11 +185,11 @@ class Strayt1Fragment(
     @SuppressLint("InflateParams")
     private fun changeTab(
         it: Int,
-        tab: LinearLayout?,
+        tab: View?,
         check: Boolean
-    ): LinearLayout {
-        val customTab: LinearLayout =
-            tab ?: LayoutInflater.from(context).inflate(R.layout.tab_stray_t1, null) as LinearLayout
+    ): View? {
+        val customTab: View =
+            tab ?: LayoutInflater.from(context).inflate(R.layout.tab_stray_t1, null)
         val tab_label = customTab.findViewById(R.id.nav_label) as TextView
         val tab_icon = customTab.findViewById(R.id.nav_icon) as ImageView
         tab_label.text = resources.getString(navLabels[it])

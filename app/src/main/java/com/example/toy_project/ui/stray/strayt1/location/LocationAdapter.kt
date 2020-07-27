@@ -12,7 +12,7 @@ import com.example.toy_project.R
 class LocationAdapter(
     context: Context
 ) : ArrayAdapter<OperatedCountry>(context, 0, OperatedCountry.values()) {
-    val layoutInflater: LayoutInflater = LayoutInflater.from(context)
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View
