@@ -9,6 +9,10 @@
     <string name="tab_strayt1">센터 보호현황</string>
     <string name="tab_strayt2">유기동물 사연</string>
 
+    <string name="stray_upr">시/도</string>
+    <string name="stray_org">시/군/구</string>
+    <string name="stray_care">보호소</string>
+
     <string name="stray_location">지역</string>
     <string name="stray_date">날짜</string>
     

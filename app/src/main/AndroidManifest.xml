@@ -30,7 +30,8 @@
         <activity android:name=".ui.memo.MemoActivity" />
         <activity android:name=".ui.gallery.GalleryActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.stray.StrayActivity" />
+        <activity android:name=".ui.stray.StrayActivity"
+            android:theme="@style/TextLabel"/>
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden">

@@ -39,6 +39,18 @@ class Items {
 @Root(name = "item", strict = false)
 class Item {
     /*
+    보호소번호
+     */
+    @field:Element(name = "careRegNo", required = false)
+    var careRegNo: String? = ""
+
+    /*
+    시군구상위코드
+     */
+    @field:Element(name = "uprCd", required = false)
+    var uprCd: String? = ""
+
+    /*
     시도코드
      */
     @field:Element(name = "orgCd", required = false)

@@ -5,8 +5,6 @@ import io.reactivex.Flowable
 import retrofit2.http.*
 
 interface StrayService {
-    @GET("sido")
-    fun getSido(@Query("serviceKey") serviceKey: String): Flowable<Stray>
 
     @GET("abandonmentPublic")
     fun getStrayList(
@@ -14,4 +12,13 @@ interface StrayService {
         @Query("upr_cd") upr_cd: String, @Query("org_cd") org_cd: String, @Query("care_reg_no") care_reg_no: String,
         @Query("pageNo") pageNo: String, @Query("numOfRows") numOfRows: String, @Query("serviceKey") serviceKey: String
     ): Flowable<Stray>
+
+    @GET("sido")
+    fun getUprList(@Query("serviceKey") serviceKey: String): Flowable<Stray>
+
+    @GET("sigungu")
+    fun getOrgList(@Query("upr_cd") upr_cd: String, @Query("serviceKey") serviceKey: String): Flowable<Stray>
+
+    @GET("shelter")
+    fun getCareList(@Query("upr_cd") upr_cd: String, @Query("org_cd") org_cd: String, @Query("serviceKey") serviceKey: String): Flowable<Stray>
 }
