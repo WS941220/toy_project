@@ -16,5 +16,6 @@ interface LocationContract {
         fun getUpr()
         fun getOrg(upr_cd: String)
         fun getCare(upr_cd: String, org_cd: String)
+        fun setLocation(upr_cd: String, org_cd: String, care_reg_no: String)
     }
 }

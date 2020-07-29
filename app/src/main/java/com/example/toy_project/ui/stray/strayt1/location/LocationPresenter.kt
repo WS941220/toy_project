@@ -53,6 +53,9 @@ class LocationPresenter @Inject constructor(
 
 
     override fun getOrg(upr_cd: String) {
+        preference.setStrayUpr(upr_cd)
+        preference.setStrayOrg("")
+        preference.setStrayCare("")
         view?.showProgress("")
         strayService.getOrgList(
             URLDecoder.decode(upr_cd, "UTF-8"),
@@ -71,6 +74,9 @@ class LocationPresenter @Inject constructor(
     }
 
     override fun getCare(upr_cd: String, org_cd: String) {
+        preference.setStrayUpr(upr_cd)
+        preference.setStrayOrg(org_cd)
+        preference.setStrayCare("")
         view?.showProgress("")
         strayService.getCareList(
             URLDecoder.decode(upr_cd, "UTF-8"),
@@ -87,6 +93,12 @@ class LocationPresenter @Inject constructor(
                 view?.closeProgress()
             }
         )
+    }
+
+    override fun setLocation(upr_cd: String, org_cd: String, care_reg_no: String) {
+        preference.setStrayUpr(upr_cd)
+        preference.setStrayOrg(org_cd)
+        preference.setStrayCare(care_reg_no)
     }
 
 

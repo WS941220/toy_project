@@ -40,32 +40,18 @@ class Strayt1Presenter @Inject constructor(
         this.view = view
     }
 
-//    @SuppressLint("CheckResult")
-//    override fun callApi(baseContext: Context) {
-//        strayService.getSido(URLDecoder.decode(preference.getStrayKey(), "UTF-8")).subscribeOn(
-//            Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
-//                onNext = {
-//                    Toast.makeText(baseContext, "A", Toast.LENGTH_SHORT).show()
-//                },
-//
-//                onError = {
-//                    Toast.makeText(baseContext, it.message, Toast.LENGTH_SHORT).show()
-//                }
-//            )
-//    }
 
     @SuppressLint("CheckResult")
-    override fun getStrayList(stray: Map<String, String>) {
+    override fun getStrayList(num: Int) {
         view?.showProgress("")
         strayService.getStrayList(
             URLDecoder.decode(preference.getStraySdate(), "UTF-8"),
             URLDecoder.decode(preference.getStrayEdate(), "UTF-8"),
             URLDecoder.decode("429900", "UTF-8"),
-            URLDecoder.decode("", "UTF-8"),
-            URLDecoder.decode("", "UTF-8"),
-            URLDecoder.decode("", "UTF-8"),
-            URLDecoder.decode(stray["num"], "UTF-8"),
+            URLDecoder.decode(preference.getStrayUpr(), "UTF-8"),
+            URLDecoder.decode(preference.getStrayOrg(), "UTF-8"),
+            URLDecoder.decode(preference.getStrayCare(), "UTF-8"),
+            URLDecoder.decode(num.toString(), "UTF-8"),
             URLDecoder.decode("20", "UTF-8"),
             URLDecoder.decode(preference.getStrayKey(), "UTF-8")
         ).subscribeOn(
@@ -74,6 +60,7 @@ class Strayt1Presenter @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
                 onNext = {
                     view?.showStrayList(it.body[0].items[0].item)
+                    view?.setBottomTitle(preference.getStraySdate(), preference.getStrayEdate())
                     view?.closeProgress()
                 },
 
@@ -81,5 +68,13 @@ class Strayt1Presenter @Inject constructor(
                     view?.closeProgress()
                 }
             )
+    }
+
+    override fun setDefault(s_date: String, e_date: String, upr_cd: String, org_cd: String, care_reg_no: String) {
+        preference.setStraySdate(s_date)
+        preference.setStrayEdate(e_date)
+        preference.setStrayUpr(upr_cd)
+        preference.setStrayOrg(org_cd)
+        preference.setStrayCare(care_reg_no)
     }
 }

@@ -28,6 +28,7 @@ fun AppCompatActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
 fun Fragment.replaceFragmentInFragment(fragment: Fragment, @IdRes frameId: Int) {
     childFragmentManager.transact {
         replace(frameId, fragment)
+        addToBackStack(null)
     }
 }
 
@@ -36,6 +37,8 @@ fun Fragment.addFragmentToFragment(fragment: Fragment, tag: String) {
         add(fragment, tag)
     }
 }
+
+
 
 /**
  * 툴바 셋팅

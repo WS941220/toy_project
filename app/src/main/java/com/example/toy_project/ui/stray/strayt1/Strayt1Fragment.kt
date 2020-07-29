@@ -2,6 +2,7 @@ package com.example.toy_project.ui.stray.strayt1
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,8 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_stray_t1.*
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 import kotlin.reflect.cast
 
@@ -51,6 +54,7 @@ class Strayt1Fragment(
     Strayt1Contract.Strayt1View {
 
     companion object {
+        var locationState: Bundle? = null
         fun newInstance(): Strayt1Fragment {
             return Strayt1Fragment()
         }
@@ -66,15 +70,28 @@ class Strayt1Fragment(
     private lateinit var sheetBehavior: BottomSheetBehavior<LinearLayout>
 
     private var strayList: MutableList<Item> = arrayListOf()
-    private var callStray: MutableMap<String, String> = hashMapOf()
     private var numPager: Int = 1
+
+    @SuppressLint("SimpleDateFormat")
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val cal: Calendar = Calendar.getInstance().apply {
+            add(Calendar.DATE, -15)
+        }
+        presenter.setDefault(
+            SimpleDateFormat("yyyyMMdd").format(
+                Date(cal.timeInMillis)
+            ), SimpleDateFormat("yyyyMMdd").format(
+                Date()
+            ), "", "", ""
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.attach(this)
         strayAdapter = Strayt1Adapter(context, strayList, this)
-        callStray["num"] = "$numPager"
-        presenter.getStrayList(callStray)
+        presenter.getStrayList(numPager)
     }
 
     override fun onDestroyView() {
@@ -93,9 +110,8 @@ class Strayt1Fragment(
                 val totalItemCount = layoutManager.itemCount
                 val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
                 if (lastVisible >= totalItemCount - 1) {
-                    callStray["num"] = "${numPager + 1}"
-                    presenter.getStrayList(callStray)
                     numPager++
+                    presenter.getStrayList(numPager)
                 }
             }
         })
@@ -177,10 +193,22 @@ class Strayt1Fragment(
     private fun searchLists() {
         strayList.clear()
         numPager = 1
-        presenter.getStrayList(callStray)
+        presenter.getStrayList(numPager)
         sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         filterIcon.setImageResource(R.drawable.ic_search)
     }
+
+    @SuppressLint("SetTextI18n")
+    override fun setBottomTitle(
+        s_date: String,
+        e_date: String
+    ) {
+        bottomTitle.text = "${locationState?.getString("seUpr") ?: "전체"} | " +
+                "${locationState?.getString("seOrg") ?: "전체"} | " +
+                "${locationState?.getString("seCare") ?: "전체"} | " +
+                "${view?.dateFormat(s_date)} ~ ${view?.dateFormat(e_date)}"
+    }
+
 
     @SuppressLint("InflateParams")
     private fun changeTab(
