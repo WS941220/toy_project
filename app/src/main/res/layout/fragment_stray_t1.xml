@@ -82,9 +82,9 @@
         </LinearLayout>
 
         <!--And finally this is the body of the backdrop's content. You can add here whatever you need inside a view group (LinearLayout, RelativeLayout, SwipeRefreshLayout, ConstraintLayout, etc.)-->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/darkwhite">
 
             <!--The content's body goes here-->
@@ -92,7 +92,19 @@
                 android:id="@+id/strayRecyler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/noList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:text="@string/no_list"
+                android:textSize="20sp"
+                android:layout_marginBottom="@dimen/list_item_padding" />
+
+
+        </RelativeLayout>
 
     </LinearLayout>
 

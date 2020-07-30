@@ -63,14 +63,20 @@ class Strayt1Presenter @Inject constructor(
                     view?.setBottomTitle(preference.getStraySdate(), preference.getStrayEdate())
                     view?.closeProgress()
                 },
-
                 onError = {
+                    view?.setBottomTitle(preference.getStraySdate(), preference.getStrayEdate())
                     view?.closeProgress()
                 }
             )
     }
 
-    override fun setDefault(s_date: String, e_date: String, upr_cd: String, org_cd: String, care_reg_no: String) {
+    override fun setDefault(
+        s_date: String,
+        e_date: String,
+        upr_cd: String,
+        org_cd: String,
+        care_reg_no: String
+    ) {
         preference.setStraySdate(s_date)
         preference.setStrayEdate(e_date)
         preference.setStrayUpr(upr_cd)

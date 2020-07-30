@@ -19,9 +19,12 @@ class Strayt1Adapter(
     private val context: Context?, var strayList: MutableList<Item>, fragment: Fragment
 ) : RecyclerView.Adapter<Strayt1Adapter.Strayt1ViewHolder>() {
 
-    init {
+    private val listener: ClickListener
 
+    init {
+        this.listener = fragment as ClickListener
     }
+
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: Strayt1ViewHolder, position: Int) {
@@ -50,6 +53,8 @@ class Strayt1Adapter(
             }
         }
 
+        holder.itemView.setOnClickListener { listener.onItemClick(holder.picImg, position) }
+
     }
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -63,6 +68,7 @@ class Strayt1Adapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Strayt1ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_strayt1, parent, false)
+
         return Strayt1ViewHolder(itemView)
     }
 
@@ -75,6 +81,9 @@ class Strayt1Adapter(
         val picImg: ImageView = itemView.findViewById(R.id.picImg)
     }
 
+    interface ClickListener {
+        fun onItemClick(view: View, position: Int)
+    }
 
 
 }

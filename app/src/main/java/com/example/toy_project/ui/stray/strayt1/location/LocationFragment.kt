@@ -1,6 +1,7 @@
 package com.example.toy_project.ui.stray.strayt1.location
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.text.InputType
@@ -46,13 +47,17 @@ class LocationFragment : DaggerFragment(),
     private lateinit var orgAdapter: ArrayAdapter<String>
     private lateinit var careAdapter: ArrayAdapter<String>
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (Strayt1Fragment.locationState == null) {
+            presenter.getUpr()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.subscribe()
         presenter.attach(this)
-        if (Strayt1Fragment.locationState == null) {
-            presenter.getUpr()
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -66,19 +71,22 @@ class LocationFragment : DaggerFragment(),
             setAdapter(uprAdapter)
             setText("전체", false)
             setOnItemClickListener { parent, view, position, id ->
-                Strayt1Fragment.locationState?.putString("seUpr", this.text.toString())
+                if (Strayt1Fragment.locationState == null) Strayt1Fragment.locationState = Bundle()
+                Strayt1Fragment.locationState?.putString("seUpr", text.toString())
+                orgList.apply {
+                    clear()
+                    add("전체")
+                    orgSpinner.setText("전체", false)
+                    Strayt1Fragment.locationState?.putString("seOrg", "전체")
+                }
+                careList.apply {
+                    clear()
+                    add("전체")
+                    careSpinner.setText("전체", false)
+                    Strayt1Fragment.locationState?.putString("seCare", "전체")
+                }
                 when (position) {
                     0 -> {
-                        orgList.apply {
-                            clear()
-                            add("전체")
-                            orgSpinner.setText("전체", false)
-                        }
-                        careList.apply {
-                            clear()
-                            add("전체")
-                            careSpinner.setText("전체", false)
-                        }
                         presenter.setLocation(
                             "", "", ""
                         )
@@ -94,14 +102,15 @@ class LocationFragment : DaggerFragment(),
             setAdapter(orgAdapter)
             setText("전체", false)
             setOnItemClickListener { parent, view, position, id ->
-                Strayt1Fragment.locationState?.putString("seOrg", this.text.toString())
+                Strayt1Fragment.locationState?.putString("seOrg", text.toString())
+                careList.apply {
+                    clear()
+                    add("전체")
+                    careSpinner.setText("전체", false)
+                    Strayt1Fragment.locationState?.putString("seCare", "전체")
+                }
                 when (position) {
                     0 -> {
-                        careList.apply {
-                            clear()
-                            add("전체")
-                            careSpinner.setText("전체", false)
-                        }
                         presenter.setLocation(
                             listMap["uprList"]?.get(uprList.indexOf(uprSpinner.text.toString()))!!,
                             "",
@@ -122,7 +131,7 @@ class LocationFragment : DaggerFragment(),
             setAdapter(careAdapter)
             setText("전체", false)
             setOnItemClickListener { parent, view, position, id ->
-                Strayt1Fragment.locationState?.putString("seCare", this.text.toString())
+                Strayt1Fragment.locationState?.putString("seCare", text.toString())
                 presenter.setLocation(
                     listMap["uprList"]?.get(uprList.indexOf(uprSpinner.text.toString()))!!,
                     listMap["orgList"]?.get(orgList.indexOf(orgSpinner.text.toString()))!!,
@@ -143,6 +152,10 @@ class LocationFragment : DaggerFragment(),
         Strayt1Fragment.locationState?.putStringArrayList("sUpr", ArrayList(listMap["uprList"]!!))
         Strayt1Fragment.locationState?.putStringArrayList("sOrg", ArrayList(listMap["orgList"]!!))
         Strayt1Fragment.locationState?.putStringArrayList("sCare", ArrayList(listMap["careList"]!!))
+
+        Strayt1Fragment.locationState?.putString("seUpr", uprSpinner.text.toString())
+        Strayt1Fragment.locationState?.putString("seOrg", orgSpinner.text.toString())
+        Strayt1Fragment.locationState?.putString("seCare", careSpinner.text.toString())
     }
 
 
