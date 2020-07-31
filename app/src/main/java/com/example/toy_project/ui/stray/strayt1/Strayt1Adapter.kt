@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.toy_project.R
 import com.example.toy_project.di.model.Item
+import com.example.toy_project.util.Format
 import java.text.SimpleDateFormat
 
 class Strayt1Adapter(
@@ -36,7 +37,7 @@ class Strayt1Adapter(
         }
         Glide.with(context!!).load(stray.popfile).into(holder.picImg)
         holder.stateTxt.text = stray.processState
-        holder.dateTxt.text = "${dateFormat(stray.noticeSdt)} ~ ${dateFormat(stray.noticeEdt)}"
+        holder.dateTxt.text = "${Format.dateFormat(stray.noticeSdt!!)} ~ ${Format.dateFormat(stray.noticeEdt!!)}"
         holder.kindTxt.text = "${stray.kindCd} | ${stray.colorCd} | $sSexCd".replace("[기타축종] ", "")
         holder.noticeTxt.text = stray.noticeNo
         holder.placeTxt.text = stray.happenPlace
@@ -55,13 +56,6 @@ class Strayt1Adapter(
 
         holder.itemView.setOnClickListener { listener.onItemClick(holder.picImg, position) }
 
-    }
-
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    @SuppressLint("SimpleDateFormat")
-    private fun dateFormat(date: String?): String {
-        val nowFormat = SimpleDateFormat("yyyyMMdd").parse(date)
-        return SimpleDateFormat("yyyy.MM.dd").format(nowFormat)
     }
 
     override fun getItemCount(): Int = strayList.size

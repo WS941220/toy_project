@@ -4,6 +4,7 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 import retrofit2.http.Body
+import java.io.Serializable
 
 @Root(name = "response", strict = false)
 class Stray {
@@ -37,7 +38,7 @@ class Items {
 }
 
 @Root(name = "item", strict = false)
-class Item {
+class Item : Serializable {
     /*
     보호소번호
      */

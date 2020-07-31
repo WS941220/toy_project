@@ -32,8 +32,7 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.stray.StrayActivity"
             android:theme="@style/TextLabel"/>
-        <activity android:name=".ui.stray_detail.Stray_DetailActivity"
-            android:theme="@style/Animation"/>
+        <activity android:name=".ui.stray_detail.Stray_DetailActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden">

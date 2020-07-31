@@ -17,5 +17,6 @@
 
     <dimen name="nav_tab_label_font_size">8sp</dimen>
     <dimen name="stray_tab_label_font_size">12sp</dimen>
+    <dimen name="label_font_10sp">10sp</dimen>
 
 </resources>

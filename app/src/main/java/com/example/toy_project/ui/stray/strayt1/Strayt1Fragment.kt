@@ -31,6 +31,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_stray_t1.*
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -108,6 +109,9 @@ class Strayt1Fragment(
     @ExperimentalStdlibApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        banner.setLeftButtonAction { banner.dismiss() }
+        banner.setRightButtonAction { banner.dismiss() }
 
         strayRecyler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -213,7 +217,7 @@ class Strayt1Fragment(
         bottomTitle.text = "${locationState?.getString("seUpr") ?: "전체"} | " +
                 "${locationState?.getString("seOrg") ?: "전체"} | " +
                 "${locationState?.getString("seCare") ?: "전체"} | " +
-                "${view?.dateFormat(s_date)} ~ ${view?.dateFormat(e_date)}"
+                "${Format.dateFormat(s_date)} ~ ${Format.dateFormat(e_date)}"
     }
 
 
@@ -276,15 +280,13 @@ class Strayt1Fragment(
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onItemClick(view: View, position: Int) {
-
         val img: Pair<View, String> =
             Pair.create(view, view.transitionName)
         val optionsCompat =
             ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, img)
 
         val intent = Intent(context, Stray_DetailActivity::class.java).apply {
-//            val stray: MutableList<String> = arrayListOf()
-           putExtra("img", strayList[position].popfile)
+            putExtra("stray", strayList[position])
         }
         startActivity(intent, optionsCompat.toBundle())
     }

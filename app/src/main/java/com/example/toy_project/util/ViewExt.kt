@@ -26,7 +26,12 @@ fun Activity.progressOff() {
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 @SuppressLint("SimpleDateFormat")
-fun View.dateFormat(date: String?): String {
-    val nowFormat = SimpleDateFormat("yyyyMMdd").parse(date)
-    return SimpleDateFormat("yyyy.MM.dd").format(nowFormat)
+class Format() {
+
+    companion object {
+        fun dateFormat(date: String): String {
+            val nowFormat = SimpleDateFormat("yyyyMMdd").parse(date)
+            return SimpleDateFormat("yyyy.MM.dd").format(nowFormat)
+        }
+    }
 }

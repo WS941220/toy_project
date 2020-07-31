@@ -10,21 +10,28 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#33FFFFFF"
+        android:layout_height="match_parent"
         app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize" />
+            android:layout_height="match_parent">
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/fullScreenImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="pair_thumb"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/fullScreenImg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

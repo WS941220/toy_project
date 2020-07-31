@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -26,6 +27,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_stray.*
 import kotlinx.android.synthetic.main.activity_stray.tabs
+import kotlinx.android.synthetic.main.fragment_stray_t1.*
 import kotlinx.android.synthetic.main.shared_toolbar.*
 import javax.inject.Inject
 
@@ -78,6 +80,13 @@ class StrayActivity(
             }
         })
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+        }
+        return true
     }
 
     @SuppressLint("InflateParams")

@@ -26,15 +26,4 @@
         <item name="colorControlActivated">@color/primary</item>
     </style>
 
-    <style name="Animation">
-<!--        <item name="android:windowSharedElementsUseOverlay" tools:targetApi="lollipop">false</item>-->
-<!--        <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>-->
-
-<!--        <item name="android:windowSharedElementEnterTransition" tools:targetApi="lollipop">@transition/activity_detail_s_e_enter</item>-->
-<!--        <item name="android:windowSharedElementReturnTransition" tools:targetApi="lollipop">@transition/activity_detail_s_e_return</item>-->
-
-<!--        <item name="android:windowEnterTransition" tools:targetApi="lollipop">@transition/activity_detail_enter</item>-->
-<!--        <item name="android:windowReturnTransition" tools:targetApi="lollipop">@transition/activity_detail_return</item>-->
-    </style>
-
 </resources>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--This the interface sitting behind the backdrop and shown when it is collapsed-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,32 +16,32 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            app:tabGravity="fill"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
-            app:tabRippleColor="@android:color/transparent" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:tabGravity="fill"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@android:color/transparent" />
 
             <ImageView
                 android:id="@+id/searchIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:src="@drawable/ic_search"/>
+                android:src="@drawable/ic_search" />
 
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <!--This is the backdrop's content with a BottomSheetBehaviour applied to it-->
@@ -52,6 +52,17 @@
         android:orientation="vertical"
         app:behavior_peekHeight="40dp"
         app:layout_behavior=".util.GestureLockedBottomSheet">
+
+        <com.cesar.materialcomponents.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentText="정부 API의 '기타분류'로 분류된 동물정보가 보여집니다. \n더 많은 정보는 동물보호관리시스템을 통해 확인해 주세요."
+            app:leftButtonText="자세히 보기"
+            app:rightButtonText="끄기"
+            app:contentTextColor="@color/colorPrimaryDark"
+            app:buttonsTextColor="@color/colorPrimaryDark"
+            app:bannerBackgroundColor="@color/darkwhite"/>
 
         <!--This is the backdrop's header with a title and icon-->
         <LinearLayout
@@ -67,10 +78,10 @@
                 android:id="@+id/bottomTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:textSize="@dimen/nav_tab_label_font_size"
-                android:text="전체 | 전체 | 전체 | 2020.06.21 ~ 2020.07.21" />
+                android:layout_weight="1"
+                android:text="전체 | 전체 | 전체 | 2020.06.21 ~ 2020.07.21"
+                android:textSize="@dimen/nav_tab_label_font_size" />
 
             <ImageView
                 android:id="@+id/filterIcon"
@@ -97,11 +108,11 @@
                 android:id="@+id/noList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/list_item_padding"
                 android:text="@string/no_list"
-                android:textSize="20sp"
-                android:layout_marginBottom="@dimen/list_item_padding" />
+                android:textSize="20sp" />
 
 
         </RelativeLayout>

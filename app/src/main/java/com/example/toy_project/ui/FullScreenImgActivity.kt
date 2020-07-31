@@ -22,8 +22,7 @@ class FullScreenImgActivity : AppCompatActivity() {
 
         setupActionBar(R.id.toolbar) {
             setTitle(R.string.nothing)
-            setDisplayHomeAsUpEnabled(true);
-            setDisplayShowHomeEnabled(true);
+            setDisplayHomeAsUpEnabled(true)
         }
 
         findViewById<AppBarLayout>(R.id.actionBar).apply {
