@@ -24,7 +24,7 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Item
 import com.example.toy_project.ui.stray.strayt1.calendar.CalendarFragment
 import com.example.toy_project.ui.stray.strayt1.location.LocationFragment
-import com.example.toy_project.ui.stray_detail.Stray_DetailActivity
+import com.example.toy_project.ui.stray.stray_detail.Stray_DetailActivity
 import com.example.toy_project.util.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.datepicker.MaterialDatePicker

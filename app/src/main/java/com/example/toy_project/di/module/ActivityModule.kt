@@ -11,8 +11,7 @@ import com.example.toy_project.ui.memo.MemoActivity
 import com.example.toy_project.ui.memo.MemoModule
 import com.example.toy_project.ui.stray.StrayActivity
 import com.example.toy_project.ui.stray.StrayModule
-import com.example.toy_project.ui.stray_detail.Stray_DetailActivity
-import com.example.toy_project.ui.stray_detail.Stray_DetailModule
+import com.example.toy_project.ui.stray.stray_detail.Stray_DetailActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -41,10 +40,5 @@ abstract class ActivityModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = [StrayModule::class])
     abstract fun strayActivity(): StrayActivity
-
-    @ActivityScoped
-    @ContributesAndroidInjector(modules = [Stray_DetailModule::class])
-    abstract fun stray_detailActivity(): Stray_DetailActivity
-
 
 }

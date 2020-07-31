@@ -1,4 +1,4 @@
-package com.example.toy_project.ui.stray_detail
+package com.example.toy_project.ui.stray.stray_detail
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -23,11 +24,8 @@ import kotlinx.android.synthetic.main.activity_stray_detail.stateTxt
 import kotlinx.android.synthetic.main.item_strayt1.*
 import javax.inject.Inject
 
+class Stray_DetailActivity : AppCompatActivity() {
 
-class Stray_DetailActivity : DaggerAppCompatActivity(), Stray_DetailContract.View {
-
-    @Inject
-    lateinit var presenter: Stray_DetailContract.Presenter
     lateinit var stray: Item
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -111,14 +109,6 @@ class Stray_DetailActivity : DaggerAppCompatActivity(), Stray_DetailContract.Vie
             android.R.id.home -> onBackPressed()
         }
         return true
-    }
-
-    override fun showProgress(msg: String) {
-        this.progressOn(msg)
-    }
-
-    override fun closeProgress() {
-        this.progressOff()
     }
 
 }
