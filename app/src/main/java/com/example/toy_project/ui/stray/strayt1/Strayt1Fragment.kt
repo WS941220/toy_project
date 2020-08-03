@@ -160,7 +160,6 @@ class Strayt1Fragment(
         filterIcon.setOnClickListener { toggleFilters() }
         searchIcon.setOnClickListener { searchLists() }
 
-
     }
 
     override fun onCreateView(

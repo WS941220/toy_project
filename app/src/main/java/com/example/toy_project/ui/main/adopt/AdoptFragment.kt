@@ -1,32 +1,27 @@
 package com.example.toy_project.ui.main.adopt
 
+import android.app.Activity
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
-import com.example.toy_project.ui.addeditmemo.AddEditMemoActivity
-import com.example.toy_project.ui.addeditmemo.AddEditMemoFragment
-import com.example.toy_project.ui.memo.MemoAdapter
+import com.example.toy_project.ui.main.MainActivity
 import com.example.toy_project.ui.stray.StrayActivity
+import com.example.toy_project.util.CategoryAdapter
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
-import com.jakewharton.rxbinding2.view.visibility
 import dagger.android.support.DaggerFragment
-import org.w3c.dom.Text
 import javax.inject.Inject
 
 @ActivityScoped
 class AdoptFragment : DaggerFragment(),
-    AdoptContract.AdoptView, AdoptAdapterR.ItemListener {
+    AdoptContract.AdoptView, CategoryAdapter.ClickListner {
 
     companion object {
         fun newInstance(): AdoptFragment {
@@ -43,36 +38,19 @@ class AdoptFragment : DaggerFragment(),
     private lateinit var category_title: TextView
     private lateinit var category_btn: ImageView
 
-    private lateinit var adoptAdapterR: AdoptAdapterR
-    private val categoryItems: MutableList<AdoptAdapterR.Companion.Item> = arrayListOf()
+    private lateinit var categoryAdapter: CategoryAdapter
+    private val categoryItems: MutableList<CategoryAdapter.Companion.Item> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.subscribe()
         presenter.attach(this)
-
-
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "Fruits", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Apple", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Orange", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Banana", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "Cars", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Audi", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Aston Martin", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "BMW", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Child, "Cadillac", true))
-        categoryItems.add(AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "유기동물 가족만들기", false))
-
-        val places: AdoptAdapterR.Companion.Item =
-            AdoptAdapterR.Companion.Item(AdoptAdapterR.Header, "Places",true)
-        places.invisibleChildren.add(
-            AdoptAdapterR.Companion.Item(
-                AdoptAdapterR.Child,
-                "Karnataka", true
-            )
+        presenter.getCategories()
+        categoryAdapter = CategoryAdapter(
+            context,
+            categoryItems,
+            this
         )
-        categoryItems.add(places)
-        adoptAdapterR = AdoptAdapterR(context, categoryItems, this)
 
     }
 
@@ -126,7 +104,7 @@ class AdoptFragment : DaggerFragment(),
         }
         val mLayoutManager = LinearLayoutManager(context)
         categoryR.layoutManager = mLayoutManager
-        categoryR.adapter = adoptAdapterR
+        categoryR.adapter = categoryAdapter
 
         setHasOptionsMenu(true)
 
@@ -149,9 +127,13 @@ class AdoptFragment : DaggerFragment(),
     }
 
     override fun onStartStray() {
-        Intent(context, StrayActivity::class.java).apply {
+        Intent(activity, StrayActivity::class.java).apply {
             startActivity(this)
         }
+    }
+
+    override fun showCategories(categoryItems: MutableList<CategoryAdapter.Companion.Item>) {
+        this.categoryItems.addAll(categoryItems)
     }
 
     override fun showProgress(msg: String) {

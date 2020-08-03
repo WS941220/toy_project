@@ -1,4 +1,4 @@
-package com.example.toy_project.ui.main.adopt
+package com.example.toy_project.util
 
 import android.content.Context
 import android.util.TypedValue
@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
+import com.example.toy_project.ui.main.adopt.AdoptFragment
+import com.example.toy_project.ui.main.talk.TalkFragment
 
-
-class AdoptAdapterR(
+class CategoryAdapter(
     private val context: Context?, private var categories: MutableList<Item>, fragment: Fragment
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -32,10 +32,10 @@ class AdoptAdapterR(
 
     }
 
-    private val listener: ItemListener
+    private val clickListner: ClickListner
 
     init {
-        this.listener = fragment as ItemListener
+        this.clickListner = fragment as ClickListner
     }
 
 
@@ -49,7 +49,9 @@ class AdoptAdapterR(
                 val inflater =
                     parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 view = inflater.inflate(R.layout.item_categoies, parent, false)
-                return ListViewHolder(view)
+                return ListViewHolder(
+                    view
+                )
             }
             Child -> {
                 val itemTextView = TextView(context)
@@ -78,15 +80,6 @@ class AdoptAdapterR(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        val categoryText = categories[position]
-//        holder.categoryText.text = categoryText
-//
-//        holder.mainCard.setOnClickListener {
-//            when(holder.categoryText.text) {
-//                "TEST1" -> { listener.onStartStray()}
-//            }
-//        }
-
         val item: Item = categories[position]
         when (item.type) {
             Header -> {
@@ -105,7 +98,7 @@ class AdoptAdapterR(
                         itemController.extendableImg.visibility = View.GONE
                     }
                 }
-                itemController.mainCard.setOnClickListener(View.OnClickListener {
+                itemController.itemView.setOnClickListener(View.OnClickListener {
                     when (item.child) {
                         true -> {
                             if (item.invisibleChildren.size == 0) {
@@ -133,13 +126,11 @@ class AdoptAdapterR(
                         false -> {
                             when (holder.categoryText.text) {
                                 "유기동물 가족만들기" -> {
-                                    listener.onStartStray()
+                                    clickListner.onStartStray()
                                 }
                             }
                         }
                     }
-
-
                 })
             }
             Child -> {
@@ -152,12 +143,11 @@ class AdoptAdapterR(
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var refferalItem: Item? = null
-        val mainCard: CardView = itemView.findViewById(R.id.mainCard)
         val categoryText: TextView = itemView.findViewById(R.id.categoryText)
         val extendableImg: ImageView = itemView.findViewById(R.id.extendableImg)
     }
 
-    interface ItemListener {
+    interface ClickListner {
         fun onStartStray()
     }
 
