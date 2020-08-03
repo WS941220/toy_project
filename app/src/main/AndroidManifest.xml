@@ -24,6 +24,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".ui.FullScreenImgActivity" />
+        <activity android:name=".ui.show_list.ShowListActivity" />
         <activity
             android:name=".ui.addeditmemo.AddEditMemoActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -32,7 +33,7 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.stray.StrayActivity"
             android:theme="@style/TextLabel"/>
-        <activity android:name=".ui.stray.stray_detail.Stray_DetailActivity" />
+        <activity android:name=".ui.stray.stray_detail.StrayDetailActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden">

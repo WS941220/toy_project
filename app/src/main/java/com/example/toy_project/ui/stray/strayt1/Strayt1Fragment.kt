@@ -1,7 +1,6 @@
 package com.example.toy_project.ui.stray.strayt1
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -16,7 +15,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.util.Pair
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
@@ -24,18 +22,15 @@ import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.di.model.Item
 import com.example.toy_project.ui.stray.strayt1.calendar.CalendarFragment
 import com.example.toy_project.ui.stray.strayt1.location.LocationFragment
-import com.example.toy_project.ui.stray.stray_detail.Stray_DetailActivity
+import com.example.toy_project.ui.stray.stray_detail.StrayDetailActivity
 import com.example.toy_project.util.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_stray_t1.*
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.HashMap
 import kotlin.reflect.cast
 
 
@@ -284,7 +279,7 @@ class Strayt1Fragment(
         val optionsCompat =
             ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, img)
 
-        val intent = Intent(context, Stray_DetailActivity::class.java).apply {
+        val intent = Intent(context, StrayDetailActivity::class.java).apply {
             putExtra("stray", strayList[position])
         }
         startActivity(intent, optionsCompat.toBundle())

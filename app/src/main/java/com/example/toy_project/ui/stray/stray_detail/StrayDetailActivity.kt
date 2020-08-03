@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_stray_detail.stateTxt
 import kotlinx.android.synthetic.main.item_strayt1.*
 import javax.inject.Inject
 
-class Stray_DetailActivity : AppCompatActivity() {
+class StrayDetailActivity : AppCompatActivity() {
 
     lateinit var stray: Item
 

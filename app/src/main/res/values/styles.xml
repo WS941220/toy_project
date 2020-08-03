@@ -21,7 +21,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:textColorHint">@color/primary</item>
-        <item name="android:textSize">@dimen/stray_tab_label_font_size</item>
+        <item name="android:textSize">@dimen/label_font_14sp</item>
         <item name="colorControlNormal">@color/colorPrimaryDark</item>
         <item name="colorControlActivated">@color/primary</item>
     </style>

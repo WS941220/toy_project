@@ -11,7 +11,6 @@ import com.example.toy_project.ui.memo.MemoActivity
 import com.example.toy_project.ui.memo.MemoModule
 import com.example.toy_project.ui.stray.StrayActivity
 import com.example.toy_project.ui.stray.StrayModule
-import com.example.toy_project.ui.stray.stray_detail.Stray_DetailActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

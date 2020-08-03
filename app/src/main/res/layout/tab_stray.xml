@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:shadowColor="@android:color/black"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/stray_tab_label_font_size" />
+        android:textSize="@dimen/label_font_14sp" />
 
 </LinearLayout>

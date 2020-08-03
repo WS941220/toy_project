@@ -15,8 +15,8 @@
     <dimen name="back_raius">40dp</dimen>
     <dimen name="img_raius">20dp</dimen>
 
-    <dimen name="nav_tab_label_font_size">8sp</dimen>
-    <dimen name="stray_tab_label_font_size">12sp</dimen>
     <dimen name="label_font_10sp">10sp</dimen>
+    <dimen name="label_font_14sp">14sp</dimen>
+    <dimen name="label_font_12sp">12sp</dimen>
 
 </resources>

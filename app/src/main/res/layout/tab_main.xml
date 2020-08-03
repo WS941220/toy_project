@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:shadowColor="@android:color/black"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/nav_tab_label_font_size"/>
+        android:textSize="@dimen/label_font_10sp"/>
 
 </LinearLayout>
