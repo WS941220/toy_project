@@ -77,8 +77,8 @@ class StrayDetailActivity : AppCompatActivity() {
             }
         }
 
-        imageView.setOnClickListener { fullImage(stray.popfile!!) }
-        callFab.setOnClickListener { callCare() }
+        imageView.onThrottleClick { fullImage(stray.popfile!!) }
+        callFab.onThrottleClick { callCare() }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

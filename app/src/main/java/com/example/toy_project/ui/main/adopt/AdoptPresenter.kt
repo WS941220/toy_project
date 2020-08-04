@@ -79,7 +79,9 @@ class AdoptPresenter @Inject constructor(
                 CategoryAdapter.Header, "먹이용품 판매", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Header, "유기동물 가족만들기", false))
+                CategoryAdapter.Header, "유기동물 가족만들기", false).apply {
+                className = "com.example.toy_project.ui.stray.StrayActivity"
+            })
 
         view?.showCategories(categoryItems)
     }

@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
-import com.example.toy_project.ui.main.MainActivity
-import com.example.toy_project.ui.stray.StrayActivity
+
 import com.example.toy_project.util.CategoryAdapter
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
@@ -126,10 +125,11 @@ class AdoptFragment : DaggerFragment(),
         return true
     }
 
-    override fun onStartStray() {
-        Intent(activity, StrayActivity::class.java).apply {
-            startActivity(this)
+    override fun onCategoryClick(title: String, className: Class<*>) {
+        val intent = Intent(activity, className).apply {
+
         }
+        startActivity(intent)
     }
 
     override fun showCategories(categoryItems: MutableList<CategoryAdapter.Companion.Item>) {

@@ -1,6 +1,8 @@
 package com.example.toy_project.ui.main.talk
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +16,7 @@ import com.example.toy_project.util.CategoryAdapter
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
 import dagger.android.support.DaggerFragment
+import java.util.ArrayList
 import javax.inject.Inject
 
 
@@ -22,6 +25,8 @@ class TalkFragment : DaggerFragment(),
     TalkContract.TalkView, CategoryAdapter.ClickListner {
 
     companion object {
+        const val ARGUMENT_TALK = "TALK"
+
         fun newInstance(): TalkFragment {
             return TalkFragment()
         }
@@ -125,8 +130,13 @@ class TalkFragment : DaggerFragment(),
         activity?.progressOff()
     }
 
-    override fun onStartStray() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCategoryClick(title: String, className: Class<*>) {
+        val intent = Intent(activity, className).apply {
+            putExtra("part", ARGUMENT_TALK)
+            putExtra("title", title)
+//            putExtra("category", categoryItems)
+        }
+        startActivity(intent)
     }
 
 }

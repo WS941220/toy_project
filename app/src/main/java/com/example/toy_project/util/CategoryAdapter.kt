@@ -1,6 +1,7 @@
 package com.example.toy_project.util
 
 import android.content.Context
+import android.os.Parcelable
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
-import com.example.toy_project.ui.main.adopt.AdoptFragment
-import com.example.toy_project.ui.main.talk.TalkFragment
+import java.io.Serializable
+
 
 class CategoryAdapter(
     private val context: Context?, private var categories: MutableList<Item>, fragment: Fragment
@@ -26,10 +27,10 @@ class CategoryAdapter(
             val type: Int,
             val text: String,
             val child: Boolean
-        ) {
+        ) : Serializable {
             var invisibleChildren: MutableList<Item> = arrayListOf()
+            var className: String = "com.example.toy_project.ui.show_list.ShowListActivity"
         }
-
     }
 
     private val clickListner: ClickListner
@@ -98,7 +99,7 @@ class CategoryAdapter(
                         itemController.extendableImg.visibility = View.GONE
                     }
                 }
-                itemController.itemView.setOnClickListener(View.OnClickListener {
+                itemController.itemView.onThrottleClick {
                     when (item.child) {
                         true -> {
                             if (item.invisibleChildren.size == 0) {
@@ -124,14 +125,11 @@ class CategoryAdapter(
                             }
                         }
                         false -> {
-                            when (holder.categoryText.text) {
-                                "유기동물 가족만들기" -> {
-                                    clickListner.onStartStray()
-                                }
-                            }
+                            val uiClass = Class.forName(item.className)
+                            clickListner.onCategoryClick(holder.categoryText.text.toString(), uiClass)
                         }
                     }
-                })
+                }
             }
             Child -> {
                 val itemTextView = holder.itemView as TextView
@@ -148,7 +146,7 @@ class CategoryAdapter(
     }
 
     interface ClickListner {
-        fun onStartStray()
+        fun onCategoryClick(title: String, className: Class<*>)
     }
 
 

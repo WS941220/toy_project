@@ -33,7 +33,8 @@ class TalkPresenter @Inject constructor(
                 CategoryAdapter.Header, "팔로잉 최신 글", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Header, "전체 글 보기", false))
+                CategoryAdapter.Header, "전체 글 보기", false).apply {
+            })
         categoryItems.add(
             CategoryAdapter.Companion.Item(
                 CategoryAdapter.Header, "소모임", true))
