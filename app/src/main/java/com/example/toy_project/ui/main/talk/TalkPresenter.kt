@@ -40,16 +40,16 @@ class TalkPresenter @Inject constructor(
                 CategoryAdapter.Header, "소모임", true))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "파충류", false))
+                CategoryAdapter.Child, "파충류 소모임", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "양서류", false))
+                CategoryAdapter.Child, "양서류 소모임", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "절지류", false))
+                CategoryAdapter.Child, "절지류 소모임", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "기타동물", false))
+                CategoryAdapter.Child, "기타동물 소모임", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
                 CategoryAdapter.Header, "자유로운 이야기", false))
@@ -61,32 +61,32 @@ class TalkPresenter @Inject constructor(
                 CategoryAdapter.Header, "나눔/드림", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Header, "이용후가", false))
+                CategoryAdapter.Header, "이용후기", false))
         val places: CategoryAdapter.Companion.Item =
             CategoryAdapter.Companion.Item(
                 CategoryAdapter.Header, "상식",true).apply {
                 invisibleChildren.add(
                     CategoryAdapter.Companion.Item(
                         CategoryAdapter.Child,
-                        "파충류", false
+                        "파충류 상식", false
                     )
                 )
                 invisibleChildren.add(
                     CategoryAdapter.Companion.Item(
                         CategoryAdapter.Child,
-                        "양서류", false
+                        "양서류 상식", false
                     )
                 )
                 invisibleChildren.add(
                     CategoryAdapter.Companion.Item(
                         CategoryAdapter.Child,
-                        "절지류", false
+                        "절지류 상식", false
                     )
                 )
                 invisibleChildren.add(
                     CategoryAdapter.Companion.Item(
                         CategoryAdapter.Child,
-                        "기타", false
+                        "기타 상식", false
                     )
                 )
             }

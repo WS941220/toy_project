@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="450dp">
+    android:layout_height="480dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="2dp"
+    android:layout_marginBottom="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/titleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="10dp"
+            android:text="TITLE"
+            android:textSize="@dimen/label_font_14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <androidx.cardview.widget.CardView
@@ -15,12 +29,11 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            app:cardBackgroundColor="@color/colorPrimaryDark"
             app:cardCornerRadius="40dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/titleTxt">
 
             <ImageView
                 android:id="@+id/profile"
@@ -77,8 +90,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listRecycler"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/picPager"
             android:layout_width="match_parent"
             android:layout_height="280dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -94,9 +107,11 @@
             android:text="좋아요 0명"
             android:textSize="@dimen/label_font_12sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/listRecycler" />
+            app:layout_constraintTop_toBottomOf="@id/picPager"
+            app:layout_constraintBottom_toTopOf="@id/likeBtn"/>
 
         <TextView
+            android:id="@+id/replyTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -104,10 +119,11 @@
             android:text="댓글 0개"
             android:textSize="@dimen/label_font_12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/listRecycler" />
+            app:layout_constraintTop_toBottomOf="@id/picPager"
+            app:layout_constraintBottom_toTopOf="@id/likeBtn"/>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/likeBtn"
             android:layout_width="60dp"
             android:layout_height="20dp"
             android:background="@android:color/transparent"
@@ -119,7 +135,7 @@
             app:layout_constraintTop_toBottomOf="@id/likeTxt" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/replyBtn"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="75dp"
             android:layout_height="20dp"
@@ -128,12 +144,12 @@
             android:text="댓글 작성"
             android:textSize="@dimen/label_font_12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/button1"
-            app:layout_constraintRight_toLeftOf="@id/button3"
+            app:layout_constraintLeft_toRightOf="@id/likeBtn"
+            app:layout_constraintRight_toLeftOf="@id/shareBtn"
             app:layout_constraintTop_toBottomOf="@id/likeTxt" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/shareBtn"
             android:layout_width="70dp"
             android:layout_height="20dp"
             android:background="@android:color/transparent"

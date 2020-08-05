@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.ui.main.talk.TalkFragment
 
 import com.example.toy_project.util.CategoryAdapter
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
 import dagger.android.support.DaggerFragment
+import java.io.Serializable
 import javax.inject.Inject
 
 @ActivityScoped
@@ -23,6 +25,8 @@ class AdoptFragment : DaggerFragment(),
     AdoptContract.AdoptView, CategoryAdapter.ClickListner {
 
     companion object {
+        const val ARGUMENT_ADOPT = "ADOPT"
+
         fun newInstance(): AdoptFragment {
             return AdoptFragment()
         }
@@ -48,7 +52,8 @@ class AdoptFragment : DaggerFragment(),
         categoryAdapter = CategoryAdapter(
             context,
             categoryItems,
-            this
+            this,
+            null
         )
 
     }
@@ -125,9 +130,11 @@ class AdoptFragment : DaggerFragment(),
         return true
     }
 
-    override fun onCategoryClick(title: String, className: Class<*>) {
+    override fun onCategoryClick(title: String, className: Class<*>, isClass: Boolean) {
         val intent = Intent(activity, className).apply {
-
+            putExtra("part", ARGUMENT_ADOPT)
+            putExtra("title", title)
+            putExtra("category", categoryItems as Serializable)
         }
         startActivity(intent)
     }

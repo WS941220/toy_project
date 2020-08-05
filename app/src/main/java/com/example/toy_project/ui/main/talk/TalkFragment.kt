@@ -2,7 +2,6 @@ package com.example.toy_project.ui.main.talk
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -16,8 +15,9 @@ import com.example.toy_project.util.CategoryAdapter
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
 import dagger.android.support.DaggerFragment
-import java.util.ArrayList
 import javax.inject.Inject
+import java.io.Serializable
+
 
 
 @ActivityScoped
@@ -52,7 +52,8 @@ class TalkFragment : DaggerFragment(),
         categoryAdapter = CategoryAdapter(
             context,
             categoryItems,
-            this
+            this,
+            null
         )
     }
 
@@ -130,11 +131,12 @@ class TalkFragment : DaggerFragment(),
         activity?.progressOff()
     }
 
-    override fun onCategoryClick(title: String, className: Class<*>) {
+    override fun onCategoryClick(title: String, className: Class<*>, isClass: Boolean) {
+
         val intent = Intent(activity, className).apply {
             putExtra("part", ARGUMENT_TALK)
             putExtra("title", title)
-//            putExtra("category", categoryItems)
+            putExtra("category", categoryItems as Serializable)
         }
         startActivity(intent)
     }

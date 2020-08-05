@@ -47,16 +47,16 @@ class AdoptPresenter @Inject constructor(
                 CategoryAdapter.Header, "입양/구매/교환", true))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "파충류", false))
+                CategoryAdapter.Child, "파충류(입양/구매/교환)", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "양서류", false))
+                CategoryAdapter.Child, "양서류(입양/구매/교환)", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "절지류", false))
+                CategoryAdapter.Child, "절지류(입양/구매/교환)", false))
         categoryItems.add(
             CategoryAdapter.Companion.Item(
-                CategoryAdapter.Child, "기타동물", false))
+                CategoryAdapter.Child, "기타동물(입양/구매/교환)", false))
         val places: CategoryAdapter.Companion.Item =
             CategoryAdapter.Companion.Item(
                 CategoryAdapter.Header, "제휴/업체",true).apply {
@@ -81,6 +81,7 @@ class AdoptPresenter @Inject constructor(
             CategoryAdapter.Companion.Item(
                 CategoryAdapter.Header, "유기동물 가족만들기", false).apply {
                 className = "com.example.toy_project.ui.stray.StrayActivity"
+                isClass = true
             })
 
         view?.showCategories(categoryItems)

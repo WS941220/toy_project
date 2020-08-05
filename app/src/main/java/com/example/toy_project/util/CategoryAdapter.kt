@@ -1,7 +1,7 @@
 package com.example.toy_project.util
 
+import android.app.Activity
 import android.content.Context
-import android.os.Parcelable
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,10 @@ import java.io.Serializable
 
 
 class CategoryAdapter(
-    private val context: Context?, private var categories: MutableList<Item>, fragment: Fragment
+    private val context: Context?,
+    private var categories: MutableList<Item>,
+    fragment: Fragment?,
+    activity: Activity?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -30,13 +33,18 @@ class CategoryAdapter(
         ) : Serializable {
             var invisibleChildren: MutableList<Item> = arrayListOf()
             var className: String = "com.example.toy_project.ui.show_list.ShowListActivity"
+            var isClass: Boolean = false
         }
     }
 
-    private val clickListner: ClickListner
+    private lateinit var clickListner: ClickListner
 
     init {
-        this.clickListner = fragment as ClickListner
+        if (fragment != null) {
+            this.clickListner = fragment as ClickListner
+        } else if (activity != null) {
+            this.clickListner = activity as ClickListner
+        }
     }
 
 
@@ -126,7 +134,11 @@ class CategoryAdapter(
                         }
                         false -> {
                             val uiClass = Class.forName(item.className)
-                            clickListner.onCategoryClick(holder.categoryText.text.toString(), uiClass)
+                            clickListner.onCategoryClick(
+                                holder.categoryText.text.toString(),
+                                uiClass,
+                                item.isClass
+                            )
                         }
                     }
                 }
@@ -134,6 +146,10 @@ class CategoryAdapter(
             Child -> {
                 val itemTextView = holder.itemView as TextView
                 itemTextView.text = categories[position].text
+                holder.itemView.onThrottleClick {
+                    val uiClass = Class.forName(item.className)
+                    clickListner.onCategoryClick(itemTextView.text.toString(), uiClass, item.isClass)
+                }
             }
         }
 
@@ -146,7 +162,7 @@ class CategoryAdapter(
     }
 
     interface ClickListner {
-        fun onCategoryClick(title: String, className: Class<*>)
+        fun onCategoryClick(title: String, className: Class<*>, isClass: Boolean)
     }
 
 
