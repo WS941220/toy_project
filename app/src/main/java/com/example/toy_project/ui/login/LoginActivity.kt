@@ -19,12 +19,11 @@ class LoginActivity : DaggerAppCompatActivity(), LoginContract.View {
         var usrid: String
         var usrpw: String
 
-//        ok_btn.setOnClickListener {
-//            usrid = id_test.text.toString()
-//            usrpw = pw_test.text.toString()
-//
-//            presenter.okBtn(usrid, usrpw, baseContext)
-//        }
+        btnLogin.setOnClickListener {
+            usrid = etEmail.text.toString()
+            usrpw = etPassword.text.toString()
+            presenter.okBtn(usrid, usrpw, baseContext)
+        }
 //        pass_btn.setOnClickListener {
 //            presenter.passBtn(baseContext)
 //        }

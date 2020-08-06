@@ -29,7 +29,7 @@ class NetworkModule {
     @Named("provideRetrofit")
     fun provideRetrofitInterface() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.0.226:8080")
+            .baseUrl("http://10.0.2.2:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

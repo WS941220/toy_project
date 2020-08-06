@@ -99,7 +99,6 @@ class ShowListActivity : AppCompatActivity(), CategoryAdapter.ClickListner {
                 val mLayoutManager = LinearLayoutManager(baseContext)
                 showRecycler.layoutManager = mLayoutManager
                 showRecycler.adapter = talkAdapter
-                talkAdapter.notifyDataSetChanged()
             }
         }
 
