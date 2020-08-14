@@ -16,4 +16,7 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun authenticate(@Body user: User): Flowable<Token>
 
+    @GET("/authenticate/{clasnm}")
+    fun getCategory(@Path("clasnm") clasnm: String): Flowable<Token>
+
 }

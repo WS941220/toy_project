@@ -28,7 +28,8 @@ class AdoptPresenter @Inject constructor(
     override fun getCategories() {
         val categoryItems: MutableList<CategoryAdapter.Companion.Item> = arrayListOf()
         categoryItems.add(
-            CategoryAdapter.Companion.Item(
+            CategoryAdapter.Companion.Item
+                (
                 CategoryAdapter.Header, "분양", true))
         categoryItems.add(
             CategoryAdapter.Companion.Item(

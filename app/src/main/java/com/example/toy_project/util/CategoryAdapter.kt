@@ -147,7 +147,7 @@ class CategoryAdapter(
                 val itemTextView = holder.itemView as TextView
                 itemTextView.text = categories[position].text
                 holder.itemView.onThrottleClick {
-                    val uiClass = Class.forName(item.className)
+                    val uiClass = Class.forName("com.example.toy_project.${item.className}")
                     clickListner.onCategoryClick(itemTextView.text.toString(), uiClass, item.isClass)
                 }
             }
