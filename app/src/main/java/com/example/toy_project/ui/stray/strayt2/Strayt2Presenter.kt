@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 @ActivityScoped
 class Strayt2Presenter @Inject constructor(
-    private val disposables: CompositeDisposable
 ) : BasePresenter<Strayt2Contract.Strayt2View?>(),
     Strayt2Contract.Strayt2Presenter {
 
@@ -15,9 +14,6 @@ class Strayt2Presenter @Inject constructor(
     }
 
     override fun unsubscribe() {
-        super.unsubscribe()
-        disposables.clear()
-        disposables.dispose()
     }
 
     override fun attach(view: Strayt2Contract.Strayt2View) {

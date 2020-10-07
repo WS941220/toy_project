@@ -22,6 +22,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
 
@@ -30,7 +31,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    retrofit_version = '2.4.0'
+    retrofit_version = '2.6.0'
     rxjava2_version = '2.1.8'
     rxandroid_version = '2.0.1'
     rxbinding_version = '2.2.0'
@@ -40,7 +41,7 @@ ext {
     appCompatVersion = '1.0.2'
     androidXAnnotations = '1.0.1'
 
-    materialVersion = '1.1.0'
+    materialVersion = '1.2.1'
     cardVersion = '1.0.0'
     recyclerViewVersion = '1.1.0'
     viewPagerVersion = '1.0.0'

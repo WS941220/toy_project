@@ -5,29 +5,27 @@ import com.example.toy_project.base.BasePresenter
 import com.example.toy_project.data.StrayService
 import com.example.toy_project.di.Scoped.ActivityScoped
 import com.example.toy_project.util.SettingPreference
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.*
+import java.lang.Exception
 import java.net.URLDecoder
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @SuppressLint("CheckResult")
 @ActivityScoped
 class LocationPresenter @Inject constructor(
-    private val disposables: CompositeDisposable,
+    private var job: Job,
     private val strayService: StrayService,
     private val preference: SettingPreference
 ) : BasePresenter<LocationContract.LocationView?>(),
-    LocationContract.LocationPresenter {
-
+    LocationContract.LocationPresenter, CoroutineScope {
+    override val coroutineContext: CoroutineContext = job + Dispatchers.IO
     override fun subscribe() {
+        job = Job()
     }
 
     override fun unsubscribe() {
         super.unsubscribe()
-        disposables.clear()
-        disposables.dispose()
     }
 
     override fun attach(view: LocationContract.LocationView) {
@@ -36,19 +34,23 @@ class LocationPresenter @Inject constructor(
 
     override fun getUpr() {
         view?.showProgress("")
-        strayService.getUprList(
-            URLDecoder.decode(preference.getStrayKey(), "UTF-8")
-        ).subscribeOn(
-            Schedulers.io()
-        ).observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
-            onNext = {
-                view?.showUprList(it.body[0].items[0].item)
-                view?.closeProgress()
-            },
-            onError = {
-                view?.closeProgress()
+
+        launch {
+            try {
+                strayService.getUprList(
+                    URLDecoder.decode(preference.getStrayKey(), "UTF-8")
+                ).let {
+                    withContext(Dispatchers.Main) {
+                        view?.showUprList(it.body[0].items[0].item)
+                        view?.closeProgress()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    view?.closeProgress()
+                }
             }
-        )
+        }
     }
 
 
@@ -57,20 +59,24 @@ class LocationPresenter @Inject constructor(
         preference.setStrayOrg("")
         preference.setStrayCare("")
         view?.showProgress("")
-        strayService.getOrgList(
-            URLDecoder.decode(upr_cd, "UTF-8"),
-            URLDecoder.decode(preference.getStrayKey(), "UTF-8")
-        ).subscribeOn(
-            Schedulers.io()
-        ).observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
-            onNext = {
-                view?.showOrgList(it.body[0].items[0].item)
-                view?.closeProgress()
-            },
-            onError = {
-                view?.closeProgress()
+
+        launch {
+            try {
+                strayService.getOrgList(
+                    URLDecoder.decode(upr_cd, "UTF-8"),
+                    URLDecoder.decode(preference.getStrayKey(), "UTF-8")
+                ).let {
+                    withContext(Dispatchers.Main) {
+                        view?.showOrgList(it.body[0].items[0].item)
+                        view?.closeProgress()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    view?.closeProgress()
+                }
             }
-        )
+        }
     }
 
     override fun getCare(upr_cd: String, org_cd: String) {
@@ -78,21 +84,25 @@ class LocationPresenter @Inject constructor(
         preference.setStrayOrg(org_cd)
         preference.setStrayCare("")
         view?.showProgress("")
-        strayService.getCareList(
-            URLDecoder.decode(upr_cd, "UTF-8"),
-            URLDecoder.decode(org_cd, "UTF-8"),
-            URLDecoder.decode(preference.getStrayKey(), "UTF-8")
-        ).subscribeOn(
-            Schedulers.io()
-        ).observeOn(AndroidSchedulers.mainThread()).onBackpressureBuffer().subscribeBy(
-            onNext = {
-                view?.showCareList(it.body[0].items[0].item)
-                view?.closeProgress()
-            },
-            onError = {
-                view?.closeProgress()
+
+        launch {
+            try {
+                strayService.getCareList(
+                    URLDecoder.decode(upr_cd, "UTF-8"),
+                    URLDecoder.decode(org_cd, "UTF-8"),
+                    URLDecoder.decode(preference.getStrayKey(), "UTF-8")
+                ).let {
+                    withContext(Dispatchers.Main) {
+                        view?.showCareList(it.body[0].items[0].item)
+                        view?.closeProgress()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    view?.closeProgress()
+                }
             }
-        )
+        }
     }
 
     override fun setLocation(upr_cd: String, org_cd: String, care_reg_no: String) {

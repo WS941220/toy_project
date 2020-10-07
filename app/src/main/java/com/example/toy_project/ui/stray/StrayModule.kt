@@ -22,14 +22,15 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.Job
 
 @Module(includes = [StrayModule.StrayAbstractModule::class])
 class StrayModule {
 
     @ActivityScoped
     @Provides
-    fun provideCompositeDisposable(): CompositeDisposable {
-        return CompositeDisposable()
+    fun provideJob(): Job {
+        return Job()
     }
 
     @Module

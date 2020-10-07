@@ -16,6 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.Job
 
 @Module(includes = [MainModule.MainAbstractModule::class])
 class MainModule {
@@ -24,6 +25,12 @@ class MainModule {
     @Provides
     fun provideCompositeDisposable(): CompositeDisposable {
         return CompositeDisposable()
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideJob(): Job {
+        return Job()
     }
 
     @Module

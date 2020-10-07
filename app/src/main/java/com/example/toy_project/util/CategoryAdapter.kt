@@ -12,12 +12,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
-import java.io.Serializable
-
+import com.example.toy_project.di.model.Category
 
 class CategoryAdapter(
     private val context: Context?,
-    private var categories: MutableList<Item>,
+    private var categories: MutableList<Category>,
     fragment: Fragment?,
     activity: Activity?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -25,16 +24,6 @@ class CategoryAdapter(
     companion object {
         const val Header: Int = 0
         const val Child: Int = 1
-
-        class Item constructor(
-            val type: Int,
-            val text: String,
-            val child: Boolean
-        ) : Serializable {
-            var invisibleChildren: MutableList<Item> = arrayListOf()
-            var className: String = "com.example.toy_project.ui.show_list.ShowListActivity"
-            var isClass: Boolean = false
-        }
     }
 
     private lateinit var clickListner: ClickListner
@@ -89,7 +78,7 @@ class CategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item: Item = categories[position]
+        val item: Category = categories[position]
         when (item.type) {
             Header -> {
                 val itemController: ListViewHolder = holder as ListViewHolder
@@ -133,7 +122,7 @@ class CategoryAdapter(
                             }
                         }
                         false -> {
-                            val uiClass = Class.forName(item.className)
+                            val uiClass = Class.forName("com.example.toy_project.${item.className}")
                             clickListner.onCategoryClick(
                                 holder.categoryText.text.toString(),
                                 uiClass,
@@ -156,7 +145,7 @@ class CategoryAdapter(
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var refferalItem: Item? = null
+        var refferalItem: Category? = null
         val categoryText: TextView = itemView.findViewById(R.id.categoryText)
         val extendableImg: ImageView = itemView.findViewById(R.id.extendableImg)
     }

@@ -30,7 +30,7 @@ class TalkAdapter(
 
     }
 
-    override fun getItemCount(): Int = 30
+    override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

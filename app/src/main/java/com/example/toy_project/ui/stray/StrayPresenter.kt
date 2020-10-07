@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 @ActivityScoped
 class StrayPresenter @Inject constructor(
-    private val disposables: CompositeDisposable
 ) : BasePresenter<StrayContract.StrayView?>(),
     StrayContract.StrayPresenter {
 
@@ -18,8 +17,6 @@ class StrayPresenter @Inject constructor(
 
     override fun unsubscribe() {
         super.unsubscribe()
-        disposables.clear()
-        disposables.dispose()
     }
 
     override fun attach(view: StrayContract.StrayView) {

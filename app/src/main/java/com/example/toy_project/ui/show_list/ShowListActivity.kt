@@ -9,15 +9,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
+import com.example.toy_project.di.model.Category
+import com.example.toy_project.ui.login.LoginContract
 import com.example.toy_project.ui.main.adopt.AdoptFragment
 import com.example.toy_project.ui.main.talk.TalkAdapter
 import com.example.toy_project.ui.main.talk.TalkFragment
 import com.example.toy_project.util.CategoryAdapter
-import com.example.toy_project.util.CategoryAdapter.Companion.Item
 import com.example.toy_project.util.setupActionBar
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_show_list.*
+import javax.inject.Inject
 
-class ShowListActivity : AppCompatActivity(), CategoryAdapter.ClickListner {
+class ShowListActivity : DaggerAppCompatActivity(), CategoryAdapter.ClickListner {
+
+    @Inject
+    lateinit var presenter: ShowListContract.Presenter
 
     private lateinit var categoryRecycler: RecyclerView
     private lateinit var showRecycler: RecyclerView
@@ -28,7 +34,7 @@ class ShowListActivity : AppCompatActivity(), CategoryAdapter.ClickListner {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var talkAdapter: TalkAdapter
 
-    private val categoryItems: MutableList<Item> = arrayListOf()
+    private val categoryItems: MutableList<Category> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +43,7 @@ class ShowListActivity : AppCompatActivity(), CategoryAdapter.ClickListner {
         val part = intent.getStringExtra("part")
         val title = intent.getStringExtra("title")
         @Suppress("UNCHECKED_CAST")
-        val category = intent.getSerializableExtra("category") as MutableList<Item>
+        val category = intent.getSerializableExtra("category") as MutableList<Category>
 
         categoryRecycler = findViewById(R.id.categoryRecycler)
         showRecycler = findViewById(R.id.showRecycler)
@@ -94,13 +100,14 @@ class ShowListActivity : AppCompatActivity(), CategoryAdapter.ClickListner {
 
         when(part) {
             TalkFragment.ARGUMENT_TALK -> {
-                val list: ArrayList<String> = arrayListOf("1","2")
+                val list = presenter.getTalkList()
                 talkAdapter= TalkAdapter(baseContext, list, this)
                 val mLayoutManager = LinearLayoutManager(baseContext)
                 showRecycler.layoutManager = mLayoutManager
                 showRecycler.adapter = talkAdapter
             }
         }
+
 
     }
 

@@ -3,8 +3,12 @@ package com.example.toy_project.di.module
 import com.example.toy_project.data.ApiService
 import com.example.toy_project.data.StrayService
 import com.example.toy_project.di.Scoped.AppScoped
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import javax.inject.Named
+import kotlin.coroutines.CoroutineContext
 
 
 @Module
@@ -20,14 +25,14 @@ class NetworkModule {
 
     @AppScoped
     @Provides
-    fun provideApiService(@Named("provideRetrofit") retrofit: Retrofit) : ApiService {
+    fun provideApiService(@Named("provideRetrofit") retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
     @AppScoped
     @Provides
     @Named("provideRetrofit")
-    fun provideRetrofitInterface() : Retrofit {
+    fun provideRetrofitInterface(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080")
             .addConverterFactory(GsonConverterFactory.create())
@@ -39,14 +44,14 @@ class NetworkModule {
 
     @AppScoped
     @Provides
-    fun provideStrayService(@Named("provideRetrofit2") retrofit: Retrofit) : StrayService {
+    fun provideStrayService(@Named("provideRetrofit2") retrofit: Retrofit): StrayService {
         return retrofit.create(StrayService::class.java)
     }
 
     @AppScoped
     @Provides
     @Named("provideRetrofit2")
-    fun provideRetrofitInterface2() : Retrofit {
+    fun provideRetrofitInterface2(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/")
             .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -55,7 +60,6 @@ class NetworkModule {
             .client(createOkHttpClient())
             .build()
     }
-
 
     private fun createOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()

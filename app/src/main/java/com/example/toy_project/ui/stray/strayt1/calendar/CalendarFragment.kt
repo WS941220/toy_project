@@ -27,11 +27,9 @@ class CalendarFragment : DaggerFragment(),
     CalendarContract.CalendarView {
 
     companion object {
-
         fun newInstance(): CalendarFragment {
             return CalendarFragment()
         }
-
     }
 
     @Inject
@@ -41,7 +39,6 @@ class CalendarFragment : DaggerFragment(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.subscribe()
         presenter.attach(this)
     }
 
@@ -81,12 +78,6 @@ class CalendarFragment : DaggerFragment(),
         calendar_view.update()
 
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        presenter.unsubscribe()
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

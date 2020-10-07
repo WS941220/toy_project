@@ -18,7 +18,6 @@ import com.example.toy_project.ui.stray.strayt1.Strayt1Fragment
 import com.example.toy_project.util.SettingPreference
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
-import com.jakewharton.rxbinding2.view.selected
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_stray_location.*
 import kotlinx.android.synthetic.main.item_gallery.view.*

@@ -9,6 +9,8 @@ import com.example.toy_project.ui.main.MainActivity
 import com.example.toy_project.ui.main.MainModule
 import com.example.toy_project.ui.memo.MemoActivity
 import com.example.toy_project.ui.memo.MemoModule
+import com.example.toy_project.ui.show_list.ShowListActivity
+import com.example.toy_project.ui.show_list.ShowListModule
 import com.example.toy_project.ui.stray.StrayActivity
 import com.example.toy_project.ui.stray.StrayModule
 import dagger.Module
@@ -32,9 +34,9 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [AddEditMemoModule::class])
     abstract fun addEditMemoActivity(): AddEditMemoActivity
 
-//    @ActivityScoped
-//    @ContributesAndroidInjector(modules = [GalleryModule::class])
-//    abstract fun galleryActivity(): GalleryActivity
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [ShowListModule::class])
+    abstract fun showListActivity(): ShowListActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = [StrayModule::class])

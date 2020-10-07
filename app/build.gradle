@@ -30,6 +30,7 @@ android {
         }
     }
 
+
 }
 
 dependencies {
@@ -59,6 +60,8 @@ dependencies {
     //noinspection GradleCompatible
     implementation "com.android.support:design:27.1.1"
 
+
+
     //이미지처리를 위한 glide, 이미지 줌을 위한 Photoview 라이브러리 사용
     /**
      * PhotoView
@@ -73,6 +76,9 @@ dependencies {
 
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
 
+    //kakao
+    implementation "com.kakao.sdk:v2-user-rx:2.0.3"
+
     //google
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
@@ -80,8 +86,8 @@ dependencies {
     // rx
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxbinding_version"
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+//    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxbinding_version"
 
     // retrofit + gson
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

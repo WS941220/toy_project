@@ -2,7 +2,9 @@ package com.example.toy_project.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import com.google.android.material.snackbar.Snackbar
 import android.view.View
@@ -32,6 +34,17 @@ fun View.onThrottleClick(action: (v: View) -> Unit) {
 fun View.onThrottleClick(action: (v: View) -> Unit, interval: Long) {
     val listener = View.OnClickListener { action(it) }
     setOnClickListener(OnThrottleClickListener(listener, interval))
+}
+
+fun Activity.errorDialog(message: String) {
+    val builder = AlertDialog.Builder(this)
+    builder.setMessage(message)
+        .setPositiveButton("OK",
+            DialogInterface.OnClickListener { dialog, id ->
+                // FIRE ZE MISSILES!
+            })
+    builder.create()
+    builder.show()
 }
 
 

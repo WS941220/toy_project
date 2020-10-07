@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toy_project.R
 import com.example.toy_project.di.Scoped.ActivityScoped
+import com.example.toy_project.di.model.Category
 import com.example.toy_project.ui.main.home.TalkContract
 import com.example.toy_project.util.CategoryAdapter
+import com.example.toy_project.util.errorDialog
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
 import dagger.android.support.DaggerFragment
@@ -42,7 +44,7 @@ class TalkFragment : DaggerFragment(),
     private lateinit var category_btn: ImageView
 
     private lateinit var categoryAdapter: CategoryAdapter
-    private val categoryItems: MutableList<CategoryAdapter.Companion.Item> = arrayListOf()
+    private val categoryItems: MutableList<Category> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,10 +120,13 @@ class TalkFragment : DaggerFragment(),
         inflater.inflate(R.menu.search_menu, menu)
     }
 
-    override fun showCategories(categoryItems: MutableList<CategoryAdapter.Companion.Item>) {
+    override fun showCategories(categoryItems: MutableList<Category>) {
         this.categoryItems.addAll(categoryItems)
     }
 
+    override fun errorDialog(message: String) {
+        activity?.errorDialog(message)
+    }
 
     override fun showProgress(msg: String) {
         activity?.progressOn(msg)

@@ -31,8 +31,9 @@
         <activity android:name=".ui.memo.MemoActivity" />
         <activity android:name=".ui.gallery.GalleryActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.stray.StrayActivity"
-            android:theme="@style/TextLabel"/>
+        <activity
+            android:name=".ui.stray.StrayActivity"
+            android:theme="@style/TextLabel" />
         <activity android:name=".ui.stray.stray_detail.StrayDetailActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
@@ -40,6 +41,20 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao28ceba19fa9796ed256b763889997ccb" />
             </intent-filter>
         </activity>
 
