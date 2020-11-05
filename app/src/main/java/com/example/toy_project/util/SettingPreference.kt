@@ -22,8 +22,7 @@ class SettingPreference constructor(
     private val strayKey: String = "0pt5JC%2BQEsWiyIgpG1CpJZEIOlYxRjo3X2js8WB66HJ6izbAjm6fNH0bk4DIhhV43mfJgxeTju5dtkrxY7dyFA%3D%3D",
     private var cal: Calendar = Calendar.getInstance().apply {
         add(Calendar.DATE, -15)
-    }
-) : CachedPreference(context, NAME) {
+    }) : CachedPreference(context, NAME) {
     fun setPushEnable(enable: Boolean) = put(PUSH_ENABLE, enable)
     fun isPushEnable() = get(PUSH_ENABLE, false) as Boolean
 

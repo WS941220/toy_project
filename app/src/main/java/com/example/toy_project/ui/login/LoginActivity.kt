@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.example.toy_project.R
+import com.example.toy_project.ui.stray.StrayActivity
 import com.example.toy_project.util.onThrottleClick
 import com.example.toy_project.util.progressOff
 import com.example.toy_project.util.progressOn
@@ -42,7 +43,7 @@ class LoginActivity : DaggerAppCompatActivity(), LoginContract.View {
 //            presenter.passBtn(baseContext)
 //        }
 
-        main_btn.setOnClickListener {
+        main_btn.onThrottleClick {
             presenter.mainBtn(baseContext)
         }
         google_Btn.onThrottleClick {
@@ -51,13 +52,23 @@ class LoginActivity : DaggerAppCompatActivity(), LoginContract.View {
         kakao_Btn.onThrottleClick {
             presenter.kakaoLogin(baseContext)
         }
+        apitest_btn.onThrottleClick {
+            Intent(baseContext, StrayActivity::class.java).apply {
+                baseContext.startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            }
+        }
 
     }
 
     override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        updateUI(account)
+        googleLogin(account)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unsubscribe()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -74,7 +85,7 @@ class LoginActivity : DaggerAppCompatActivity(), LoginContract.View {
         startActivityForResult(intent, RC_SIGN_IN)
     }
 
-    override fun updateUI(account: GoogleSignInAccount?) {
+    override fun googleLogin(account: GoogleSignInAccount?) {
         Toast.makeText(this, account?.email, Toast.LENGTH_LONG).show()
     }
 

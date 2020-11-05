@@ -75,9 +75,9 @@ class LoginPresenter @Inject constructor(
     override fun googleLogin(task: Task<GoogleSignInAccount>) {
         try {
             val account = task.getResult(ApiException::class.java)
-            view?.updateUI(account)
+            view?.googleLogin(account)
         } catch (e: ApiException) {
-            view?.updateUI(null)
+            view?.googleLogin(null)
         }
     }
 
@@ -114,6 +114,7 @@ class LoginPresenter @Inject constructor(
     }
 
     override fun mainBtn(baseContext: Context) {
+        mGoogleSignInClient.signOut()
         Intent(baseContext, MainActivity::class.java).apply {
             baseContext.startActivity(this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }

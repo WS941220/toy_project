@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.Task
 interface LoginContract {
     interface View: BaseContract.View {
         fun googleLogin(intent: Intent)
-        fun updateUI(account: GoogleSignInAccount?)
+        fun googleLogin(account: GoogleSignInAccount?)
     }
     interface Presenter : BaseContract.Presenter<View> {
         fun google(baseContext: Context)

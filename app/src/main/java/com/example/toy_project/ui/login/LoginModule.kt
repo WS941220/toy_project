@@ -16,6 +16,7 @@ class LoginModule {
     @Provides
     fun provideGoogleLogin(): GoogleSignInOptions {
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("266363868586-52mk0acv23r57ceid0tl5q8nr5rk4ks8.apps.googleusercontent.com")
             .requestEmail()
             .build()
     }
