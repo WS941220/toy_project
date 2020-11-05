@@ -29,6 +29,7 @@ class TalkPresenter @Inject constructor(
     }
 
     override fun getCategories() {
+        view?.showProgress("")
         launch {
             try {
                 apiService.getCategory("Talk").apply {
@@ -39,7 +40,8 @@ class TalkPresenter @Inject constructor(
             } catch (e: Exception) {
                 val msg = e.message.toString()
                 withContext(Dispatchers.Main) {
-                    view?.errorDialog(msg)
+                    view?.closeProgress()
+                    view?.errorDialog("데이터를 불러오는데 실패했습니다." + msg)
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.example.toy_project.ui.stray.strayt1
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -105,7 +106,9 @@ class Strayt1Fragment(
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        banner.setLeftButtonAction { banner.dismiss() }
+        banner.setLeftButtonAction { Intent(Intent.ACTION_VIEW, Uri.parse("http://www.animal.go.kr")).apply {
+            startActivity(this)
+        } }
         banner.setRightButtonAction { banner.dismiss() }
 
         strayRecyler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
